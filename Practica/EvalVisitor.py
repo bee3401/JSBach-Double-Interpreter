@@ -43,6 +43,8 @@ class EvalVisitor(jsBachVisitor):
         l = list(ctx.getChildren())
         i = 0
 
+        print("root length: " + str(len(l)))
+
         while i < len(l) and l[i].getText() != "<EOF>":
             self.visit(l[i])
             i += 1
@@ -136,13 +138,20 @@ class EvalVisitor(jsBachVisitor):
         print(output)
 
     def visitIf_block(self, ctx):
+        #print("ifBlock")
         l = list(ctx.getChildren())
         condition = self.visit(l[1])
 
         if condition == 1:
             self.visit(l[3])
-        #else:
-            #return "INFO :: condition was not met"
+        
+        elif len(l) > 5:
+            self.visit(l[5])
+            
+    def visitElse_block(self, ctx):
+        #print("elseBlock")
+        l = list(ctx.getChildren())
+        self.visit(l[2])
 
     def visitWhile_block(self, ctx):
         #print("visitWhile")

@@ -17,14 +17,15 @@ public class jsBachParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		NUM=10, VAR=11, MES=12, MENYS=13, MUL=14, DIV=15, MOD=16, EQ=17, NEQ=18, 
-		LT=19, GT=20, LEQ=21, GEQ=22, COMMENT=23, STR=24, WS=25;
+		T__9=10, NUM=11, VAR=12, MES=13, MENYS=14, MUL=15, DIV=16, MOD=17, EQ=18, 
+		NEQ=19, LT=20, GT=21, LEQ=22, GEQ=23, COMMENT=24, STR=25, WS=26;
 	public static final int
 		RULE_root = 0, RULE_body = 1, RULE_expr = 2, RULE_assig = 3, RULE_read = 4, 
-		RULE_write = 5, RULE_if_block = 6, RULE_while_block = 7;
+		RULE_write = 5, RULE_if_block = 6, RULE_else_block = 7, RULE_while_block = 8;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"root", "body", "expr", "assig", "read", "write", "if_block", "while_block"
+			"root", "body", "expr", "assig", "read", "write", "if_block", "else_block", 
+			"while_block"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -32,16 +33,16 @@ public class jsBachParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'('", "')'", "'<-'", "'<?>'", "'<!>'", "'if'", "'|:'", "':|'", 
-			"'while'", null, null, "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", "'/='", 
-			"'<'", "'>'", "'<='", "'>='"
+			"'else'", "'while'", null, null, "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", 
+			"'/='", "'<'", "'>'", "'<='", "'>='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, "NUM", "VAR", 
-			"MES", "MENYS", "MUL", "DIV", "MOD", "EQ", "NEQ", "LT", "GT", "LEQ", 
-			"GEQ", "COMMENT", "STR", "WS"
+			null, null, null, null, null, null, null, null, null, null, null, "NUM", 
+			"VAR", "MES", "MENYS", "MUL", "DIV", "MOD", "EQ", "NEQ", "LT", "GT", 
+			"LEQ", "GEQ", "COMMENT", "STR", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -112,9 +113,9 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(16);
+			setState(18);
 			body();
-			setState(17);
+			setState(19);
 			match(EOF);
 			}
 		}
@@ -179,53 +180,53 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(27);
+			setState(29);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__8) | (1L << NUM) | (1L << VAR))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__9) | (1L << NUM) | (1L << VAR))) != 0)) {
 				{
-				setState(25);
+				setState(27);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 				case 1:
 					{
-					setState(19);
+					setState(21);
 					expr(0);
 					}
 					break;
 				case 2:
 					{
-					setState(20);
+					setState(22);
 					assig();
 					}
 					break;
 				case 3:
 					{
-					setState(21);
+					setState(23);
 					read();
 					}
 					break;
 				case 4:
 					{
-					setState(22);
+					setState(24);
 					write();
 					}
 					break;
 				case 5:
 					{
-					setState(23);
+					setState(25);
 					if_block();
 					}
 					break;
 				case 6:
 					{
-					setState(24);
+					setState(26);
 					while_block();
 					}
 					break;
 				}
 				}
-				setState(29);
+				setState(31);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -283,23 +284,23 @@ public class jsBachParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(36);
+			setState(38);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__0:
 				{
-				setState(31);
-				match(T__0);
-				setState(32);
-				expr(0);
 				setState(33);
+				match(T__0);
+				setState(34);
+				expr(0);
+				setState(35);
 				match(T__1);
 				}
 				break;
 			case NUM:
 			case VAR:
 				{
-				setState(35);
+				setState(37);
 				_la = _input.LA(1);
 				if ( !(_la==NUM || _la==VAR) ) {
 				_errHandler.recoverInline(this);
@@ -315,7 +316,7 @@ public class jsBachParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(55);
+			setState(57);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -323,16 +324,16 @@ public class jsBachParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(53);
+					setState(55);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(38);
+						setState(40);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(39);
+						setState(41);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << NEQ) | (1L << LT) | (1L << GT) | (1L << LEQ) | (1L << GEQ))) != 0)) ) {
 						_errHandler.recoverInline(this);
@@ -342,7 +343,7 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(40);
+						setState(42);
 						expr(5);
 						}
 						break;
@@ -350,9 +351,9 @@ public class jsBachParser extends Parser {
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(41);
+						setState(43);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(42);
+						setState(44);
 						_la = _input.LA(1);
 						if ( !(_la==MUL || _la==DIV) ) {
 						_errHandler.recoverInline(this);
@@ -362,18 +363,18 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(45);
+						setState(47);
 						_errHandler.sync(this);
 						switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 						case 1:
 							{
-							setState(43);
+							setState(45);
 							expr(0);
 							}
 							break;
 						case 2:
 							{
-							setState(44);
+							setState(46);
 							match(VAR);
 							}
 							break;
@@ -384,9 +385,9 @@ public class jsBachParser extends Parser {
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(47);
+						setState(49);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(48);
+						setState(50);
 						_la = _input.LA(1);
 						if ( !(_la==MES || _la==MENYS) ) {
 						_errHandler.recoverInline(this);
@@ -396,18 +397,18 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(51);
+						setState(53);
 						_errHandler.sync(this);
 						switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 						case 1:
 							{
-							setState(49);
+							setState(51);
 							expr(0);
 							}
 							break;
 						case 2:
 							{
-							setState(50);
+							setState(52);
 							match(VAR);
 							}
 							break;
@@ -417,7 +418,7 @@ public class jsBachParser extends Parser {
 					}
 					} 
 				}
-				setState(57);
+				setState(59);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			}
@@ -451,11 +452,11 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
-			match(VAR);
-			setState(59);
-			match(T__2);
 			setState(60);
+			match(VAR);
+			setState(61);
+			match(T__2);
+			setState(62);
 			expr(0);
 			}
 		}
@@ -484,9 +485,9 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62);
+			setState(64);
 			match(T__3);
-			setState(63);
+			setState(65);
 			match(VAR);
 			}
 		}
@@ -516,24 +517,24 @@ public class jsBachParser extends Parser {
 		WriteContext _localctx = new WriteContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_write);
 		try {
-			setState(69);
+			setState(71);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(65);
+				setState(67);
 				match(T__4);
-				setState(66);
+				setState(68);
 				match(STR);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(67);
+				setState(69);
 				match(T__4);
-				setState(68);
+				setState(70);
 				expr(0);
 				}
 				break;
@@ -557,6 +558,9 @@ public class jsBachParser extends Parser {
 		public BodyContext body() {
 			return getRuleContext(BodyContext.class,0);
 		}
+		public Else_blockContext else_block() {
+			return getRuleContext(Else_blockContext.class,0);
+		}
 		public If_blockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -566,18 +570,66 @@ public class jsBachParser extends Parser {
 	public final If_blockContext if_block() throws RecognitionException {
 		If_blockContext _localctx = new If_blockContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_if_block);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
-			match(T__5);
-			setState(72);
-			expr(0);
 			setState(73);
-			match(T__6);
+			match(T__5);
 			setState(74);
-			body();
+			expr(0);
 			setState(75);
+			match(T__6);
+			setState(76);
+			body();
+			setState(77);
+			match(T__7);
+			setState(79);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__8) {
+				{
+				setState(78);
+				else_block();
+				}
+			}
+
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Else_blockContext extends ParserRuleContext {
+		public BodyContext body() {
+			return getRuleContext(BodyContext.class,0);
+		}
+		public Else_blockContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_else_block; }
+	}
+
+	public final Else_blockContext else_block() throws RecognitionException {
+		Else_blockContext _localctx = new Else_blockContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_else_block);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(81);
+			match(T__8);
+			setState(82);
+			match(T__6);
+			setState(83);
+			body();
+			setState(84);
 			match(T__7);
 			}
 		}
@@ -607,19 +659,19 @@ public class jsBachParser extends Parser {
 
 	public final While_blockContext while_block() throws RecognitionException {
 		While_blockContext _localctx = new While_blockContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_while_block);
+		enterRule(_localctx, 16, RULE_while_block);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
-			match(T__8);
-			setState(78);
+			setState(86);
+			match(T__9);
+			setState(87);
 			expr(0);
-			setState(79);
+			setState(88);
 			match(T__6);
-			setState(80);
+			setState(89);
 			body();
-			setState(81);
+			setState(90);
 			match(T__7);
 			}
 		}
@@ -654,29 +706,30 @@ public class jsBachParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\33V\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\7\3\34\n\3\f\3\16\3\37\13\3\3\4\3\4\3\4\3\4\3\4\3\4\5"+
-		"\4\'\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\60\n\4\3\4\3\4\3\4\3\4\5\4\66"+
-		"\n\4\7\48\n\4\f\4\16\4;\13\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7\3"+
-		"\7\5\7H\n\7\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\2\3\6"+
-		"\n\2\4\6\b\n\f\16\20\2\6\3\2\f\r\3\2\23\30\3\2\20\21\3\2\16\17\2Z\2\22"+
-		"\3\2\2\2\4\35\3\2\2\2\6&\3\2\2\2\b<\3\2\2\2\n@\3\2\2\2\fG\3\2\2\2\16I"+
-		"\3\2\2\2\20O\3\2\2\2\22\23\5\4\3\2\23\24\7\2\2\3\24\3\3\2\2\2\25\34\5"+
-		"\6\4\2\26\34\5\b\5\2\27\34\5\n\6\2\30\34\5\f\7\2\31\34\5\16\b\2\32\34"+
-		"\5\20\t\2\33\25\3\2\2\2\33\26\3\2\2\2\33\27\3\2\2\2\33\30\3\2\2\2\33\31"+
-		"\3\2\2\2\33\32\3\2\2\2\34\37\3\2\2\2\35\33\3\2\2\2\35\36\3\2\2\2\36\5"+
-		"\3\2\2\2\37\35\3\2\2\2 !\b\4\1\2!\"\7\3\2\2\"#\5\6\4\2#$\7\4\2\2$\'\3"+
-		"\2\2\2%\'\t\2\2\2& \3\2\2\2&%\3\2\2\2\'9\3\2\2\2()\f\6\2\2)*\t\3\2\2*"+
-		"8\5\6\4\7+,\f\5\2\2,/\t\4\2\2-\60\5\6\4\2.\60\7\r\2\2/-\3\2\2\2/.\3\2"+
-		"\2\2\608\3\2\2\2\61\62\f\4\2\2\62\65\t\5\2\2\63\66\5\6\4\2\64\66\7\r\2"+
-		"\2\65\63\3\2\2\2\65\64\3\2\2\2\668\3\2\2\2\67(\3\2\2\2\67+\3\2\2\2\67"+
-		"\61\3\2\2\28;\3\2\2\29\67\3\2\2\29:\3\2\2\2:\7\3\2\2\2;9\3\2\2\2<=\7\r"+
-		"\2\2=>\7\5\2\2>?\5\6\4\2?\t\3\2\2\2@A\7\6\2\2AB\7\r\2\2B\13\3\2\2\2CD"+
-		"\7\7\2\2DH\7\32\2\2EF\7\7\2\2FH\5\6\4\2GC\3\2\2\2GE\3\2\2\2H\r\3\2\2\2"+
-		"IJ\7\b\2\2JK\5\6\4\2KL\7\t\2\2LM\5\4\3\2MN\7\n\2\2N\17\3\2\2\2OP\7\13"+
-		"\2\2PQ\5\6\4\2QR\7\t\2\2RS\5\4\3\2ST\7\n\2\2T\21\3\2\2\2\n\33\35&/\65"+
-		"\679G";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34_\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\7\3\36\n\3\f\3\16\3!\13\3\3\4\3\4\3\4\3\4\3\4"+
+		"\3\4\5\4)\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\62\n\4\3\4\3\4\3\4\3\4\5"+
+		"\48\n\4\7\4:\n\4\f\4\16\4=\13\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3"+
+		"\7\3\7\5\7J\n\7\3\b\3\b\3\b\3\b\3\b\3\b\5\bR\n\b\3\t\3\t\3\t\3\t\3\t\3"+
+		"\n\3\n\3\n\3\n\3\n\3\n\3\n\2\3\6\13\2\4\6\b\n\f\16\20\22\2\6\3\2\r\16"+
+		"\3\2\24\31\3\2\21\22\3\2\17\20\2c\2\24\3\2\2\2\4\37\3\2\2\2\6(\3\2\2\2"+
+		"\b>\3\2\2\2\nB\3\2\2\2\fI\3\2\2\2\16K\3\2\2\2\20S\3\2\2\2\22X\3\2\2\2"+
+		"\24\25\5\4\3\2\25\26\7\2\2\3\26\3\3\2\2\2\27\36\5\6\4\2\30\36\5\b\5\2"+
+		"\31\36\5\n\6\2\32\36\5\f\7\2\33\36\5\16\b\2\34\36\5\22\n\2\35\27\3\2\2"+
+		"\2\35\30\3\2\2\2\35\31\3\2\2\2\35\32\3\2\2\2\35\33\3\2\2\2\35\34\3\2\2"+
+		"\2\36!\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \5\3\2\2\2!\37\3\2\2\2\"#\b\4"+
+		"\1\2#$\7\3\2\2$%\5\6\4\2%&\7\4\2\2&)\3\2\2\2\')\t\2\2\2(\"\3\2\2\2(\'"+
+		"\3\2\2\2);\3\2\2\2*+\f\6\2\2+,\t\3\2\2,:\5\6\4\7-.\f\5\2\2.\61\t\4\2\2"+
+		"/\62\5\6\4\2\60\62\7\16\2\2\61/\3\2\2\2\61\60\3\2\2\2\62:\3\2\2\2\63\64"+
+		"\f\4\2\2\64\67\t\5\2\2\658\5\6\4\2\668\7\16\2\2\67\65\3\2\2\2\67\66\3"+
+		"\2\2\28:\3\2\2\29*\3\2\2\29-\3\2\2\29\63\3\2\2\2:=\3\2\2\2;9\3\2\2\2;"+
+		"<\3\2\2\2<\7\3\2\2\2=;\3\2\2\2>?\7\16\2\2?@\7\5\2\2@A\5\6\4\2A\t\3\2\2"+
+		"\2BC\7\6\2\2CD\7\16\2\2D\13\3\2\2\2EF\7\7\2\2FJ\7\33\2\2GH\7\7\2\2HJ\5"+
+		"\6\4\2IE\3\2\2\2IG\3\2\2\2J\r\3\2\2\2KL\7\b\2\2LM\5\6\4\2MN\7\t\2\2NO"+
+		"\5\4\3\2OQ\7\n\2\2PR\5\20\t\2QP\3\2\2\2QR\3\2\2\2R\17\3\2\2\2ST\7\13\2"+
+		"\2TU\7\t\2\2UV\5\4\3\2VW\7\n\2\2W\21\3\2\2\2XY\7\f\2\2YZ\5\6\4\2Z[\7\t"+
+		"\2\2[\\\5\4\3\2\\]\7\n\2\2]\23\3\2\2\2\13\35\37(\61\679;IQ";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

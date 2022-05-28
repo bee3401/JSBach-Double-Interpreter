@@ -44,6 +44,11 @@ class jsBachVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by jsBachParser#else_block.
+    def visitElse_block(self, ctx:jsBachParser.Else_blockContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by jsBachParser#while_block.
     def visitWhile_block(self, ctx:jsBachParser.While_blockContext):
         return self.visitChildren(ctx)

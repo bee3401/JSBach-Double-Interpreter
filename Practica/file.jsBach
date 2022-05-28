@@ -6,4 +6,10 @@ while a < 3 |:
     a <- a + 1
 :|
 
-<!> "ueue it works"
+if a == 3 |:
+    <!> "if"
+:|
+
+else |:
+    <!> "ueue it works"
+:|

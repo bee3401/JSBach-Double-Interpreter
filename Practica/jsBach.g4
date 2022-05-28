@@ -23,7 +23,8 @@ assig: VAR '<-' expr;
 read      : '<?>'  VAR                      ;
 write     : '<!>'  STR | '<!>' expr         ;
 
-if_block: 'if' expr  '|:' body ':|';
+if_block: 'if' expr  '|:' body ':|' else_block?;
+else_block: 'else' '|:' body ':|';
 while_block:'while' expr '|:' body ':|';
 
 NUM     : [0-9]+                    ;
