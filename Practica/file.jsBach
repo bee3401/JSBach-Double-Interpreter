@@ -1,5 +1,9 @@
 ~~~This is a comment and it should be ignored~~~
-a <- 3
-<!> "read value"
-<?> b
-a + b
+a <- 0
+
+while a < 3 |:
+    <!> "entra"
+    a <- a + 1
+:|
+
+<!> "ueue it works"

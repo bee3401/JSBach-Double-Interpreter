@@ -1,11 +1,14 @@
 grammar jsBach;
 
-root : body+ EOF ;
+root : body EOF ;
 
-body:       expr 
+body:   (    expr 
         |   assig
         |   read
         |   write
+        |   if_block
+        |   while_block
+        )*
         ;
 
 expr :  '(' expr ')'
@@ -19,6 +22,9 @@ assig: VAR '<-' expr;
 
 read      : '<?>'  VAR                      ;
 write     : '<!>'  STR | '<!>' expr         ;
+
+if_block: 'if' expr  '|:' body ':|';
+while_block:'while' expr '|:' body ':|';
 
 NUM     : [0-9]+                    ;
 VAR     : [a-z] [a-zA-Z_0-9]*       ;

@@ -39,12 +39,26 @@ class EvalVisitor(jsBachVisitor):
         self.method_stack   = []
 
     def visitRoot(self, ctx):
+        #print("root")
         l = list(ctx.getChildren())
         i = 0
 
         while i < len(l) and l[i].getText() != "<EOF>":
-            print(self.visit(l[i]))
+            self.visit(l[i])
             i += 1
+        
+        print(self.variables)
+
+    def visitBody(self, ctx):
+        #print("body")
+        l = list(ctx.getChildren())
+        i = 0
+        
+        while i < len(l) and l[i].getText() != "<EOF>":
+            self.visit(l[i])
+            i += 1
+
+        #return "INFO :: ended body"
 
     def visitExpr(self, ctx):
         l = list(ctx.getChildren())
@@ -92,9 +106,13 @@ class EvalVisitor(jsBachVisitor):
                 return 0
 
     def visitAssig(self, ctx):
+        #print("visitAssig")
         l = list(ctx.getChildren())
-        self.variables[l[0].getText()] = int(l[2].getText())
-        return "added variable successfully"
+
+        value = int(self.visit(l[2]))
+        self.variables[l[0].getText()] = value
+        
+        #return "INFO :: added variable successfully"
 
     def visitRead(self, ctx):
         l = list(ctx.getChildren())
@@ -103,9 +121,10 @@ class EvalVisitor(jsBachVisitor):
         value = input()
         self.variables[l[1].getText()] = int(value)
         
-        return "value read successfully"
+        #return "INFO :: value read successfully"
 
     def visitWrite(self, ctx):
+        #print("visitWrite")
         l = list(ctx.getChildren())
         #TODO: same thing; control over Keys and regular strings
         if isinstance(l[1].getText(), str) and l[1].getText() not in self.variables:
@@ -114,5 +133,29 @@ class EvalVisitor(jsBachVisitor):
         else:
             output = self.visit(l[1])
 
-        return output
+        print(output)
+
+    def visitIf_block(self, ctx):
+        l = list(ctx.getChildren())
+        condition = self.visit(l[1])
+
+        if condition == 1:
+            self.visit(l[3])
+        #else:
+            #return "INFO :: condition was not met"
+
+    def visitWhile_block(self, ctx):
+        #print("visitWhile")
+        l = list(ctx.getChildren())
+
+        condition = self.visit(l[1])
+
+        while condition == 1:
+            self.visit(l[3])
+            condition = self.visit(l[1])
+
+        #return "INFO :: exit while: condition not met any longer"
+
+
+
         
