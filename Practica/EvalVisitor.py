@@ -1,4 +1,6 @@
+from array import array
 from statistics import variance
+from xml.dom.minidom import Element
 
 
 if __name__ is not None and "." in __name__:
@@ -37,13 +39,14 @@ class EvalVisitor(jsBachVisitor):
         self.start_function = start_function
         self.array          = []
         self.method_stack   = []
+        self.keys           = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     def visitRoot(self, ctx):
         #print("root")
         l = list(ctx.getChildren())
         i = 0
 
-        print("root length: " + str(len(l)))
+        #print("root length: " + str(len(l)))
 
         while i < len(l) and l[i].getText() != "<EOF>":
             self.visit(l[i])
@@ -63,6 +66,7 @@ class EvalVisitor(jsBachVisitor):
         #return "INFO :: ended body"
 
     def visitExpr(self, ctx):
+        print("visitExpr")
         l = list(ctx.getChildren())
         i = 0 # remains 0 if there is no brackets in the expression
  
@@ -70,14 +74,19 @@ class EvalVisitor(jsBachVisitor):
             txt = l[0].getText()
             #numeric value 
             if txt.isnumeric():
+                print("numeric " + txt)
                 return int(txt)
             #variable
             elif txt in self.variables:
+                print("variable " + txt)
+                print(self.variables[txt])
                 return self.variables[txt]
+            
             # elif for array management 
             else:
-                raise Exception('Variable not found or invalid value')
-
+                print("array " + txt)
+                return self.visit(l[0])
+                
         else:
             #brackets in expression
             if l[0].getText() == '(':
@@ -108,15 +117,25 @@ class EvalVisitor(jsBachVisitor):
                 return 0
 
     def visitAssig(self, ctx):
-        #print("visitAssig")
+        print("visitAssig")
         l = list(ctx.getChildren())
 
-        value = int(self.visit(l[2]))
-        self.variables[l[0].getText()] = value
-        
+        try:
+            #print("try block start")
+            #print(l[2].getText())
+            self.variables[l[0].getText()] = int(self.visit(l[2]))
+            #print("try block end")
+        except:
+            #print("except block start")
+            #print(self.array)
+            self.variables[l[0].getText()] = self.array
+            self.array = []
+            #print("except block end")
+
         #return "INFO :: added variable successfully"
 
     def visitRead(self, ctx):
+        #print("visitRead")
         l = list(ctx.getChildren())
 
         #TODO: probably might need to change this in a minute, when you add the Key thingies
@@ -135,7 +154,7 @@ class EvalVisitor(jsBachVisitor):
         else:
             output = self.visit(l[1])
 
-        print(output)
+        #print(output)
 
     def visitIf_block(self, ctx):
         #print("ifBlock")
@@ -164,6 +183,101 @@ class EvalVisitor(jsBachVisitor):
             condition = self.visit(l[1])
 
         #return "INFO :: exit while: condition not met any longer"
+
+    def visitArray(self, ctx):
+        print("visitArray")
+        l = list(ctx.getChildren())
+        i = 0
+        
+        self.visit(l[1])
+
+        #probably need a structure for arrays or use the variable one
+
+    def visitNumsNkeys(self, ctx):
+        print("visitNumsNKeys")
+        l = list(ctx.getChildren())
+        
+        if l[0].getText() not in self.keys:
+            self.array.append(int(l[0].getText()))
+            if len(l) > 1:
+                self.visit(l[1])
+
+        else:
+            raise Exception("not implemented yet")
+        
+    def visitGetElem(self, ctx):
+        #print("visitGetElement")
+        l = list(ctx.getChildren())
+
+        var = l[0].getText()
+        
+        if var in self.variables and isinstance(self.variables[var], list):            
+            array = self.variables[var]
+            i = int(l[2].getText())
+            
+            if i in range(0, len(array)):
+                return array[i]
+            else:
+                raise Exception("Index out of bounds")
+        
+        else:
+            raise Exception("Array not found") 
+                                
+    def visitGetLength(self, ctx):
+        #print("getLength")
+        l = list(ctx.getChildren())
+        
+        var = l[1].getText()
+        #print("var " + var)
+        #print(self.variables[var])
+        
+        if var in self.variables and isinstance(self.variables[var], list):
+            #print("entra if")
+            #print(len(self.variables[var]))
+            return len(self.variables[var])
+        
+        else:
+            raise Exception("Array not found") 
+
+    def visitAddElem(self, ctx):
+        print("visitAddElem")
+        l = list(ctx.getChildren())
+        var = l[0].getText()
+        
+        if var in self.variables and isinstance(self.variables[var], list):
+            x = self.visit(l[2])
+            
+            print("print value that has to be concatenated: ")
+            print(x)
+
+            if isinstance(x, int):
+                self.variables[var].append(x)
+            
+            elif isinstance(x, list):  
+                self.variables[var] += x
+            elif self.array:
+                self.variables[var] += self.array
+                self.array = []
+            
+        
+        else:
+            raise Exception("Variable not found or variable is not array")
+    
+    def visitRmElem(self, ctx):
+        print("RmElem")
+        l = list(ctx.getChildren())
+        x = self.visit(l[1])
+        var = l[1].getText()[0]
+        print(var)
+        try:
+            self.variables[var].remove(x)
+        
+        except:
+            raise Exception("Value not in array")
+            
+
+
+        
 
 
 

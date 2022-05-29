@@ -54,5 +54,35 @@ class jsBachVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by jsBachParser#array.
+    def visitArray(self, ctx:jsBachParser.ArrayContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsBachParser#numsNkeys.
+    def visitNumsNkeys(self, ctx:jsBachParser.NumsNkeysContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsBachParser#getLength.
+    def visitGetLength(self, ctx:jsBachParser.GetLengthContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsBachParser#getElem.
+    def visitGetElem(self, ctx:jsBachParser.GetElemContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsBachParser#addElem.
+    def visitAddElem(self, ctx:jsBachParser.AddElemContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsBachParser#rmElem.
+    def visitRmElem(self, ctx:jsBachParser.RmElemContext):
+        return self.visitChildren(ctx)
+
+
 
 del jsBachParser

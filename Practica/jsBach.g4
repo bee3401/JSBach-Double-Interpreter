@@ -16,7 +16,12 @@ expr :  '(' expr ')'
     |   expr  (MUL | DIV) (expr | VAR)      
     |   expr (MES | MENYS) (expr | VAR)     
     |   (NUM | VAR)
-;
+    |   array
+    |   getElem
+    |   getLength
+    |   addElem
+    |   rmElem
+    ;
 
 assig: VAR '<-' expr;
 
@@ -27,6 +32,17 @@ if_block: 'if' expr  '|:' body ':|' else_block?;
 else_block: 'else' '|:' body ':|';
 while_block:'while' expr '|:' body ':|';
 
+array : '{' numsNkeys '}' | '{' '}'          ;
+numsNkeys:   (NUM | VAR) numsNkeys*           
+        | KEY numsNkeys*
+        ;
+
+getLength   :   '#' VAR             ;
+getElem     :   VAR'['expr']'       ;
+addElem     :   VAR '<<' expr       ;
+rmElem      :   '8<' getElem        ;
+
+KEY     : [A-G]                     ; 
 NUM     : [0-9]+                    ;
 VAR     : [a-z] [a-zA-Z_0-9]*       ;
 
