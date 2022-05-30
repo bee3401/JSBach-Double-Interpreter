@@ -46,10 +46,10 @@ read      : '<?>'  VAR                      ;
 write     : '<!>'  STR | '<!>' expr         ;
 play      : '<:>' KEY  | '<!>' numsNkeys    ;
 
-KEY     : [A-G]                     ; 
-NUM     : [0-9]                     ;
-VAR     : [a-z] [a-zA-Z_0-9]*       ;
-PROC    : [A-Z] [a-zA-Z_0-9]*       ;
+KEY             : [A-G]                     ; 
+NUM             : [0-9]                     ;
+VAR             : [a-z] [a-zA-Z_0-9]*       ;
+METHOD_NAME     : [A-Z] [a-zA-Z_0-9]*       ;
 
 
 MES     : '+' ;

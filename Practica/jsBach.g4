@@ -1,6 +1,8 @@
 grammar jsBach;
 
-root : body EOF ;
+root : function+ EOF ;
+
+function: METHOD_NAME VAR* '|:' body ':|';
 
 body:   (    expr 
         |   assig
@@ -8,8 +10,11 @@ body:   (    expr
         |   write
         |   if_block
         |   while_block
+        |   method_call
         )*
         ;
+
+method_call: METHOD_NAME expr*  ;
 
 expr :  '(' expr ')'
     |   expr  (EQ | NEQ | LT | GT | LEQ | GEQ) expr                       
@@ -26,7 +31,7 @@ expr :  '(' expr ')'
 assig: VAR '<-' expr;
 
 read      : '<?>'  VAR                      ;
-write     : '<!>'  STR | '<!>' expr         ;
+write     : '<!>'  (STR | expr)+            ;
 
 if_block: 'if' expr  '|:' body ':|' else_block?;
 else_block: 'else' '|:' body ':|';
@@ -42,9 +47,10 @@ getElem     :   VAR'['expr']'       ;
 addElem     :   VAR '<<' expr       ;
 rmElem      :   '8<' getElem        ;
 
-KEY     : [A-G]                     ; 
-NUM     : [0-9]+                    ;
-VAR     : [a-z] [a-zA-Z_0-9]*       ;
+KEY             : [A-G]                     ; 
+NUM             : [0-9]+                    ;
+VAR             : [a-z] [a-zA-Z_0-9]*       ;
+METHOD_NAME     : [A-Z] [a-zA-Z_0-9]*       ;
 
 MES     : '+' ;
 MENYS   : '-' ;

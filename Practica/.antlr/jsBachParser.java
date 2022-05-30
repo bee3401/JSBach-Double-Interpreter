@@ -18,27 +18,28 @@ public class jsBachParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		KEY=18, NUM=19, VAR=20, MES=21, MENYS=22, MUL=23, DIV=24, MOD=25, EQ=26, 
-		NEQ=27, LT=28, GT=29, LEQ=30, GEQ=31, COMMENT=32, STR=33, WS=34;
+		KEY=18, NUM=19, VAR=20, METHOD_NAME=21, MES=22, MENYS=23, MUL=24, DIV=25, 
+		MOD=26, EQ=27, NEQ=28, LT=29, GT=30, LEQ=31, GEQ=32, COMMENT=33, STR=34, 
+		WS=35;
 	public static final int
-		RULE_root = 0, RULE_body = 1, RULE_expr = 2, RULE_assig = 3, RULE_read = 4, 
-		RULE_write = 5, RULE_if_block = 6, RULE_else_block = 7, RULE_while_block = 8, 
-		RULE_array = 9, RULE_numsNkeys = 10, RULE_getLength = 11, RULE_getElem = 12, 
-		RULE_addElem = 13, RULE_rmElem = 14;
+		RULE_root = 0, RULE_function = 1, RULE_body = 2, RULE_method_call = 3, 
+		RULE_expr = 4, RULE_assig = 5, RULE_read = 6, RULE_write = 7, RULE_if_block = 8, 
+		RULE_else_block = 9, RULE_while_block = 10, RULE_array = 11, RULE_numsNkeys = 12, 
+		RULE_getLength = 13, RULE_getElem = 14, RULE_addElem = 15, RULE_rmElem = 16;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"root", "body", "expr", "assig", "read", "write", "if_block", "else_block", 
-			"while_block", "array", "numsNkeys", "getLength", "getElem", "addElem", 
-			"rmElem"
+			"root", "function", "body", "method_call", "expr", "assig", "read", "write", 
+			"if_block", "else_block", "while_block", "array", "numsNkeys", "getLength", 
+			"getElem", "addElem", "rmElem"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'('", "')'", "'<-'", "'<?>'", "'<!>'", "'if'", "'|:'", "':|'", 
+			null, "'|:'", "':|'", "'('", "')'", "'<-'", "'<?>'", "'<!>'", "'if'", 
 			"'else'", "'while'", "'{'", "'}'", "'#'", "'['", "']'", "'<<'", "'8<'", 
-			null, null, null, "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", "'/='", 
+			null, null, null, null, "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", "'/='", 
 			"'<'", "'>'", "'<='", "'>='"
 		};
 	}
@@ -46,9 +47,9 @@ public class jsBachParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, "KEY", "NUM", "VAR", "MES", "MENYS", 
-			"MUL", "DIV", "MOD", "EQ", "NEQ", "LT", "GT", "LEQ", "GEQ", "COMMENT", 
-			"STR", "WS"
+			null, null, null, null, null, null, "KEY", "NUM", "VAR", "METHOD_NAME", 
+			"MES", "MENYS", "MUL", "DIV", "MOD", "EQ", "NEQ", "LT", "GT", "LEQ", 
+			"GEQ", "COMMENT", "STR", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -103,10 +104,13 @@ public class jsBachParser extends Parser {
 	}
 
 	public static class RootContext extends ParserRuleContext {
-		public BodyContext body() {
-			return getRuleContext(BodyContext.class,0);
-		}
 		public TerminalNode EOF() { return getToken(jsBachParser.EOF, 0); }
+		public List<FunctionContext> function() {
+			return getRuleContexts(FunctionContext.class);
+		}
+		public FunctionContext function(int i) {
+			return getRuleContext(FunctionContext.class,i);
+		}
 		public RootContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -116,13 +120,83 @@ public class jsBachParser extends Parser {
 	public final RootContext root() throws RecognitionException {
 		RootContext _localctx = new RootContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_root);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
-			body();
-			setState(31);
+			setState(35); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(34);
+				function();
+				}
+				}
+				setState(37); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==METHOD_NAME );
+			setState(39);
 			match(EOF);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FunctionContext extends ParserRuleContext {
+		public TerminalNode METHOD_NAME() { return getToken(jsBachParser.METHOD_NAME, 0); }
+		public BodyContext body() {
+			return getRuleContext(BodyContext.class,0);
+		}
+		public List<TerminalNode> VAR() { return getTokens(jsBachParser.VAR); }
+		public TerminalNode VAR(int i) {
+			return getToken(jsBachParser.VAR, i);
+		}
+		public FunctionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_function; }
+	}
+
+	public final FunctionContext function() throws RecognitionException {
+		FunctionContext _localctx = new FunctionContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_function);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(41);
+			match(METHOD_NAME);
+			setState(45);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==VAR) {
+				{
+				{
+				setState(42);
+				match(VAR);
+				}
+				}
+				setState(47);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(48);
+			match(T__0);
+			setState(49);
+			body();
+			setState(50);
+			match(T__1);
 			}
 		}
 		catch (RecognitionException re) {
@@ -173,6 +247,12 @@ public class jsBachParser extends Parser {
 		public While_blockContext while_block(int i) {
 			return getRuleContext(While_blockContext.class,i);
 		}
+		public List<Method_callContext> method_call() {
+			return getRuleContexts(Method_callContext.class);
+		}
+		public Method_callContext method_call(int i) {
+			return getRuleContext(Method_callContext.class,i);
+		}
 		public BodyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -181,60 +261,118 @@ public class jsBachParser extends Parser {
 
 	public final BodyContext body() throws RecognitionException {
 		BodyContext _localctx = new BodyContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_body);
+		enterRule(_localctx, 4, RULE_body);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41);
+			setState(61);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__9) | (1L << T__10) | (1L << T__12) | (1L << T__16) | (1L << NUM) | (1L << VAR))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__9) | (1L << T__10) | (1L << T__12) | (1L << T__16) | (1L << NUM) | (1L << VAR) | (1L << METHOD_NAME))) != 0)) {
 				{
-				setState(39);
+				setState(59);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 				case 1:
 					{
-					setState(33);
+					setState(52);
 					expr(0);
 					}
 					break;
 				case 2:
 					{
-					setState(34);
+					setState(53);
 					assig();
 					}
 					break;
 				case 3:
 					{
-					setState(35);
+					setState(54);
 					read();
 					}
 					break;
 				case 4:
 					{
-					setState(36);
+					setState(55);
 					write();
 					}
 					break;
 				case 5:
 					{
-					setState(37);
+					setState(56);
 					if_block();
 					}
 					break;
 				case 6:
 					{
-					setState(38);
+					setState(57);
 					while_block();
+					}
+					break;
+				case 7:
+					{
+					setState(58);
+					method_call();
 					}
 					break;
 				}
 				}
-				setState(43);
+				setState(63);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Method_callContext extends ParserRuleContext {
+		public TerminalNode METHOD_NAME() { return getToken(jsBachParser.METHOD_NAME, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public Method_callContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_method_call; }
+	}
+
+	public final Method_callContext method_call() throws RecognitionException {
+		Method_callContext _localctx = new Method_callContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_method_call);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(64);
+			match(METHOD_NAME);
+			setState(68);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(65);
+					expr(0);
+					}
+					} 
+				}
+				setState(70);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
 			}
 		}
@@ -298,29 +436,29 @@ public class jsBachParser extends Parser {
 		int _parentState = getState();
 		ExprContext _localctx = new ExprContext(_ctx, _parentState);
 		ExprContext _prevctx = _localctx;
-		int _startState = 4;
-		enterRecursionRule(_localctx, 4, RULE_expr, _p);
+		int _startState = 8;
+		enterRecursionRule(_localctx, 8, RULE_expr, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(55);
+			setState(82);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				{
-				setState(45);
-				match(T__0);
-				setState(46);
+				setState(72);
+				match(T__2);
+				setState(73);
 				expr(0);
-				setState(47);
-				match(T__1);
+				setState(74);
+				match(T__3);
 				}
 				break;
 			case 2:
 				{
-				setState(49);
+				setState(76);
 				_la = _input.LA(1);
 				if ( !(_la==NUM || _la==VAR) ) {
 				_errHandler.recoverInline(this);
@@ -334,54 +472,54 @@ public class jsBachParser extends Parser {
 				break;
 			case 3:
 				{
-				setState(50);
+				setState(77);
 				array();
 				}
 				break;
 			case 4:
 				{
-				setState(51);
+				setState(78);
 				getElem();
 				}
 				break;
 			case 5:
 				{
-				setState(52);
+				setState(79);
 				getLength();
 				}
 				break;
 			case 6:
 				{
-				setState(53);
+				setState(80);
 				addElem();
 				}
 				break;
 			case 7:
 				{
-				setState(54);
+				setState(81);
 				rmElem();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(74);
+			setState(101);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(72);
+					setState(99);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(57);
+						setState(84);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(58);
+						setState(85);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << NEQ) | (1L << LT) | (1L << GT) | (1L << LEQ) | (1L << GEQ))) != 0)) ) {
 						_errHandler.recoverInline(this);
@@ -391,7 +529,7 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(59);
+						setState(86);
 						expr(10);
 						}
 						break;
@@ -399,9 +537,9 @@ public class jsBachParser extends Parser {
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(60);
+						setState(87);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(61);
+						setState(88);
 						_la = _input.LA(1);
 						if ( !(_la==MUL || _la==DIV) ) {
 						_errHandler.recoverInline(this);
@@ -411,18 +549,18 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(64);
+						setState(91);
 						_errHandler.sync(this);
-						switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+						switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 						case 1:
 							{
-							setState(62);
+							setState(89);
 							expr(0);
 							}
 							break;
 						case 2:
 							{
-							setState(63);
+							setState(90);
 							match(VAR);
 							}
 							break;
@@ -433,9 +571,9 @@ public class jsBachParser extends Parser {
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(66);
+						setState(93);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(67);
+						setState(94);
 						_la = _input.LA(1);
 						if ( !(_la==MES || _la==MENYS) ) {
 						_errHandler.recoverInline(this);
@@ -445,18 +583,18 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(70);
+						setState(97);
 						_errHandler.sync(this);
-						switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+						switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 						case 1:
 							{
-							setState(68);
+							setState(95);
 							expr(0);
 							}
 							break;
 						case 2:
 							{
-							setState(69);
+							setState(96);
 							match(VAR);
 							}
 							break;
@@ -466,9 +604,9 @@ public class jsBachParser extends Parser {
 					}
 					} 
 				}
-				setState(76);
+				setState(103);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			}
 			}
 		}
@@ -496,15 +634,15 @@ public class jsBachParser extends Parser {
 
 	public final AssigContext assig() throws RecognitionException {
 		AssigContext _localctx = new AssigContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_assig);
+		enterRule(_localctx, 10, RULE_assig);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
+			setState(104);
 			match(VAR);
-			setState(78);
-			match(T__2);
-			setState(79);
+			setState(105);
+			match(T__4);
+			setState(106);
 			expr(0);
 			}
 		}
@@ -529,13 +667,13 @@ public class jsBachParser extends Parser {
 
 	public final ReadContext read() throws RecognitionException {
 		ReadContext _localctx = new ReadContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_read);
+		enterRule(_localctx, 12, RULE_read);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(81);
-			match(T__3);
-			setState(82);
+			setState(108);
+			match(T__5);
+			setState(109);
 			match(VAR);
 			}
 		}
@@ -551,9 +689,15 @@ public class jsBachParser extends Parser {
 	}
 
 	public static class WriteContext extends ParserRuleContext {
-		public TerminalNode STR() { return getToken(jsBachParser.STR, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+		public List<TerminalNode> STR() { return getTokens(jsBachParser.STR); }
+		public TerminalNode STR(int i) {
+			return getToken(jsBachParser.STR, i);
+		}
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
 		}
 		public WriteContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -563,29 +707,52 @@ public class jsBachParser extends Parser {
 
 	public final WriteContext write() throws RecognitionException {
 		WriteContext _localctx = new WriteContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_write);
+		enterRule(_localctx, 14, RULE_write);
 		try {
-			setState(88);
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(111);
+			match(T__6);
+			setState(114); 
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(84);
-				match(T__4);
-				setState(85);
-				match(STR);
+			_alt = 1;
+			do {
+				switch (_alt) {
+				case 1:
+					{
+					setState(114);
+					_errHandler.sync(this);
+					switch (_input.LA(1)) {
+					case STR:
+						{
+						setState(112);
+						match(STR);
+						}
+						break;
+					case T__2:
+					case T__10:
+					case T__12:
+					case T__16:
+					case NUM:
+					case VAR:
+						{
+						setState(113);
+						expr(0);
+						}
+						break;
+					default:
+						throw new NoViableAltException(this);
+					}
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(86);
-				match(T__4);
-				setState(87);
-				expr(0);
-				}
-				break;
+				setState(116); 
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -617,27 +784,27 @@ public class jsBachParser extends Parser {
 
 	public final If_blockContext if_block() throws RecognitionException {
 		If_blockContext _localctx = new If_blockContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_if_block);
+		enterRule(_localctx, 16, RULE_if_block);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(90);
-			match(T__5);
-			setState(91);
-			expr(0);
-			setState(92);
-			match(T__6);
-			setState(93);
-			body();
-			setState(94);
+			setState(118);
 			match(T__7);
-			setState(96);
+			setState(119);
+			expr(0);
+			setState(120);
+			match(T__0);
+			setState(121);
+			body();
+			setState(122);
+			match(T__1);
+			setState(124);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__8) {
 				{
-				setState(95);
+				setState(123);
 				else_block();
 				}
 			}
@@ -667,18 +834,18 @@ public class jsBachParser extends Parser {
 
 	public final Else_blockContext else_block() throws RecognitionException {
 		Else_blockContext _localctx = new Else_blockContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_else_block);
+		enterRule(_localctx, 18, RULE_else_block);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(126);
 			match(T__8);
-			setState(99);
-			match(T__6);
-			setState(100);
+			setState(127);
+			match(T__0);
+			setState(128);
 			body();
-			setState(101);
-			match(T__7);
+			setState(129);
+			match(T__1);
 			}
 		}
 		catch (RecognitionException re) {
@@ -707,20 +874,20 @@ public class jsBachParser extends Parser {
 
 	public final While_blockContext while_block() throws RecognitionException {
 		While_blockContext _localctx = new While_blockContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_while_block);
+		enterRule(_localctx, 20, RULE_while_block);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(103);
+			setState(131);
 			match(T__9);
-			setState(104);
+			setState(132);
 			expr(0);
-			setState(105);
-			match(T__6);
-			setState(106);
+			setState(133);
+			match(T__0);
+			setState(134);
 			body();
-			setState(107);
-			match(T__7);
+			setState(135);
+			match(T__1);
 			}
 		}
 		catch (RecognitionException re) {
@@ -746,28 +913,28 @@ public class jsBachParser extends Parser {
 
 	public final ArrayContext array() throws RecognitionException {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_array);
+		enterRule(_localctx, 22, RULE_array);
 		try {
-			setState(115);
+			setState(143);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(109);
+				setState(137);
 				match(T__10);
-				setState(110);
+				setState(138);
 				numsNkeys();
-				setState(111);
+				setState(139);
 				match(T__11);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(113);
+				setState(141);
 				match(T__10);
-				setState(114);
+				setState(142);
 				match(T__11);
 				}
 				break;
@@ -802,18 +969,18 @@ public class jsBachParser extends Parser {
 
 	public final NumsNkeysContext numsNkeys() throws RecognitionException {
 		NumsNkeysContext _localctx = new NumsNkeysContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_numsNkeys);
+		enterRule(_localctx, 24, RULE_numsNkeys);
 		int _la;
 		try {
 			int _alt;
-			setState(131);
+			setState(159);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NUM:
 			case VAR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(117);
+				setState(145);
 				_la = _input.LA(1);
 				if ( !(_la==NUM || _la==VAR) ) {
 				_errHandler.recoverInline(this);
@@ -823,44 +990,44 @@ public class jsBachParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(121);
+				setState(149);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(118);
+						setState(146);
 						numsNkeys();
 						}
 						} 
 					}
-					setState(123);
+					setState(151);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 				}
 				}
 				break;
 			case KEY:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(124);
+				setState(152);
 				match(KEY);
-				setState(128);
+				setState(156);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(125);
+						setState(153);
 						numsNkeys();
 						}
 						} 
 					}
-					setState(130);
+					setState(158);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 				}
 				}
 				break;
@@ -889,13 +1056,13 @@ public class jsBachParser extends Parser {
 
 	public final GetLengthContext getLength() throws RecognitionException {
 		GetLengthContext _localctx = new GetLengthContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_getLength);
+		enterRule(_localctx, 26, RULE_getLength);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(133);
+			setState(161);
 			match(T__12);
-			setState(134);
+			setState(162);
 			match(VAR);
 			}
 		}
@@ -923,17 +1090,17 @@ public class jsBachParser extends Parser {
 
 	public final GetElemContext getElem() throws RecognitionException {
 		GetElemContext _localctx = new GetElemContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_getElem);
+		enterRule(_localctx, 28, RULE_getElem);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(136);
+			setState(164);
 			match(VAR);
-			setState(137);
+			setState(165);
 			match(T__13);
-			setState(138);
+			setState(166);
 			expr(0);
-			setState(139);
+			setState(167);
 			match(T__14);
 			}
 		}
@@ -961,15 +1128,15 @@ public class jsBachParser extends Parser {
 
 	public final AddElemContext addElem() throws RecognitionException {
 		AddElemContext _localctx = new AddElemContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_addElem);
+		enterRule(_localctx, 30, RULE_addElem);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(141);
+			setState(169);
 			match(VAR);
-			setState(142);
+			setState(170);
 			match(T__15);
-			setState(143);
+			setState(171);
 			expr(0);
 			}
 		}
@@ -996,13 +1163,13 @@ public class jsBachParser extends Parser {
 
 	public final RmElemContext rmElem() throws RecognitionException {
 		RmElemContext _localctx = new RmElemContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_rmElem);
+		enterRule(_localctx, 32, RULE_rmElem);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(145);
+			setState(173);
 			match(T__16);
-			setState(146);
+			setState(174);
 			getElem();
 			}
 		}
@@ -1019,7 +1186,7 @@ public class jsBachParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 2:
+		case 4:
 			return expr_sempred((ExprContext)_localctx, predIndex);
 		}
 		return true;
@@ -1037,46 +1204,58 @@ public class jsBachParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3$\u0097\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%\u00b3\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\2\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\7\3*\n\3\f\3\16\3-\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\3\4\3\4\3\4\5\4:\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4C\n\4\3\4\3\4\3"+
-		"\4\3\4\5\4I\n\4\7\4K\n\4\f\4\16\4N\13\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3"+
-		"\7\3\7\3\7\3\7\5\7[\n\7\3\b\3\b\3\b\3\b\3\b\3\b\5\bc\n\b\3\t\3\t\3\t\3"+
-		"\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\5\13v\n\13"+
-		"\3\f\3\f\7\fz\n\f\f\f\16\f}\13\f\3\f\3\f\7\f\u0081\n\f\f\f\16\f\u0084"+
-		"\13\f\5\f\u0086\n\f\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17"+
-		"\3\17\3\20\3\20\3\20\3\20\2\3\6\21\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
-		"\36\2\6\3\2\25\26\3\2\34!\3\2\31\32\3\2\27\30\2\u009e\2 \3\2\2\2\4+\3"+
-		"\2\2\2\69\3\2\2\2\bO\3\2\2\2\nS\3\2\2\2\fZ\3\2\2\2\16\\\3\2\2\2\20d\3"+
-		"\2\2\2\22i\3\2\2\2\24u\3\2\2\2\26\u0085\3\2\2\2\30\u0087\3\2\2\2\32\u008a"+
-		"\3\2\2\2\34\u008f\3\2\2\2\36\u0093\3\2\2\2 !\5\4\3\2!\"\7\2\2\3\"\3\3"+
-		"\2\2\2#*\5\6\4\2$*\5\b\5\2%*\5\n\6\2&*\5\f\7\2\'*\5\16\b\2(*\5\22\n\2"+
-		")#\3\2\2\2)$\3\2\2\2)%\3\2\2\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2*-\3\2\2"+
-		"\2+)\3\2\2\2+,\3\2\2\2,\5\3\2\2\2-+\3\2\2\2./\b\4\1\2/\60\7\3\2\2\60\61"+
-		"\5\6\4\2\61\62\7\4\2\2\62:\3\2\2\2\63:\t\2\2\2\64:\5\24\13\2\65:\5\32"+
-		"\16\2\66:\5\30\r\2\67:\5\34\17\28:\5\36\20\29.\3\2\2\29\63\3\2\2\29\64"+
-		"\3\2\2\29\65\3\2\2\29\66\3\2\2\29\67\3\2\2\298\3\2\2\2:L\3\2\2\2;<\f\13"+
-		"\2\2<=\t\3\2\2=K\5\6\4\f>?\f\n\2\2?B\t\4\2\2@C\5\6\4\2AC\7\26\2\2B@\3"+
-		"\2\2\2BA\3\2\2\2CK\3\2\2\2DE\f\t\2\2EH\t\5\2\2FI\5\6\4\2GI\7\26\2\2HF"+
-		"\3\2\2\2HG\3\2\2\2IK\3\2\2\2J;\3\2\2\2J>\3\2\2\2JD\3\2\2\2KN\3\2\2\2L"+
-		"J\3\2\2\2LM\3\2\2\2M\7\3\2\2\2NL\3\2\2\2OP\7\26\2\2PQ\7\5\2\2QR\5\6\4"+
-		"\2R\t\3\2\2\2ST\7\6\2\2TU\7\26\2\2U\13\3\2\2\2VW\7\7\2\2W[\7#\2\2XY\7"+
-		"\7\2\2Y[\5\6\4\2ZV\3\2\2\2ZX\3\2\2\2[\r\3\2\2\2\\]\7\b\2\2]^\5\6\4\2^"+
-		"_\7\t\2\2_`\5\4\3\2`b\7\n\2\2ac\5\20\t\2ba\3\2\2\2bc\3\2\2\2c\17\3\2\2"+
-		"\2de\7\13\2\2ef\7\t\2\2fg\5\4\3\2gh\7\n\2\2h\21\3\2\2\2ij\7\f\2\2jk\5"+
-		"\6\4\2kl\7\t\2\2lm\5\4\3\2mn\7\n\2\2n\23\3\2\2\2op\7\r\2\2pq\5\26\f\2"+
-		"qr\7\16\2\2rv\3\2\2\2st\7\r\2\2tv\7\16\2\2uo\3\2\2\2us\3\2\2\2v\25\3\2"+
-		"\2\2w{\t\2\2\2xz\5\26\f\2yx\3\2\2\2z}\3\2\2\2{y\3\2\2\2{|\3\2\2\2|\u0086"+
-		"\3\2\2\2}{\3\2\2\2~\u0082\7\24\2\2\177\u0081\5\26\f\2\u0080\177\3\2\2"+
-		"\2\u0081\u0084\3\2\2\2\u0082\u0080\3\2\2\2\u0082\u0083\3\2\2\2\u0083\u0086"+
-		"\3\2\2\2\u0084\u0082\3\2\2\2\u0085w\3\2\2\2\u0085~\3\2\2\2\u0086\27\3"+
-		"\2\2\2\u0087\u0088\7\17\2\2\u0088\u0089\7\26\2\2\u0089\31\3\2\2\2\u008a"+
-		"\u008b\7\26\2\2\u008b\u008c\7\20\2\2\u008c\u008d\5\6\4\2\u008d\u008e\7"+
-		"\21\2\2\u008e\33\3\2\2\2\u008f\u0090\7\26\2\2\u0090\u0091\7\22\2\2\u0091"+
-		"\u0092\5\6\4\2\u0092\35\3\2\2\2\u0093\u0094\7\23\2\2\u0094\u0095\5\32"+
-		"\16\2\u0095\37\3\2\2\2\17)+9BHJLZbu{\u0082\u0085";
+		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\3\2\6\2&\n\2\r\2\16\2\'\3\2\3\2\3\3\3\3\7\3.\n\3\f\3\16\3\61\13\3\3\3"+
+		"\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4>\n\4\f\4\16\4A\13\4\3\5\3"+
+		"\5\7\5E\n\5\f\5\16\5H\13\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\5\6U\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6^\n\6\3\6\3\6\3\6\3\6\5\6d\n"+
+		"\6\7\6f\n\6\f\6\16\6i\13\6\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\t\3\t\3\t\6\t"+
+		"u\n\t\r\t\16\tv\3\n\3\n\3\n\3\n\3\n\3\n\5\n\177\n\n\3\13\3\13\3\13\3\13"+
+		"\3\13\3\f\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u0092\n\r\3"+
+		"\16\3\16\7\16\u0096\n\16\f\16\16\16\u0099\13\16\3\16\3\16\7\16\u009d\n"+
+		"\16\f\16\16\16\u00a0\13\16\5\16\u00a2\n\16\3\17\3\17\3\17\3\20\3\20\3"+
+		"\20\3\20\3\20\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\2\3\n\23\2\4\6\b"+
+		"\n\f\16\20\22\24\26\30\32\34\36 \"\2\6\3\2\25\26\3\2\35\"\3\2\32\33\3"+
+		"\2\30\31\2\u00bd\2%\3\2\2\2\4+\3\2\2\2\6?\3\2\2\2\bB\3\2\2\2\nT\3\2\2"+
+		"\2\fj\3\2\2\2\16n\3\2\2\2\20q\3\2\2\2\22x\3\2\2\2\24\u0080\3\2\2\2\26"+
+		"\u0085\3\2\2\2\30\u0091\3\2\2\2\32\u00a1\3\2\2\2\34\u00a3\3\2\2\2\36\u00a6"+
+		"\3\2\2\2 \u00ab\3\2\2\2\"\u00af\3\2\2\2$&\5\4\3\2%$\3\2\2\2&\'\3\2\2\2"+
+		"\'%\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7\2\2\3*\3\3\2\2\2+/\7\27\2\2,.\7\26"+
+		"\2\2-,\3\2\2\2.\61\3\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\62\3\2\2\2\61/\3\2"+
+		"\2\2\62\63\7\3\2\2\63\64\5\6\4\2\64\65\7\4\2\2\65\5\3\2\2\2\66>\5\n\6"+
+		"\2\67>\5\f\7\28>\5\16\b\29>\5\20\t\2:>\5\22\n\2;>\5\26\f\2<>\5\b\5\2="+
+		"\66\3\2\2\2=\67\3\2\2\2=8\3\2\2\2=9\3\2\2\2=:\3\2\2\2=;\3\2\2\2=<\3\2"+
+		"\2\2>A\3\2\2\2?=\3\2\2\2?@\3\2\2\2@\7\3\2\2\2A?\3\2\2\2BF\7\27\2\2CE\5"+
+		"\n\6\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2G\t\3\2\2\2HF\3\2\2\2IJ"+
+		"\b\6\1\2JK\7\5\2\2KL\5\n\6\2LM\7\6\2\2MU\3\2\2\2NU\t\2\2\2OU\5\30\r\2"+
+		"PU\5\36\20\2QU\5\34\17\2RU\5 \21\2SU\5\"\22\2TI\3\2\2\2TN\3\2\2\2TO\3"+
+		"\2\2\2TP\3\2\2\2TQ\3\2\2\2TR\3\2\2\2TS\3\2\2\2Ug\3\2\2\2VW\f\13\2\2WX"+
+		"\t\3\2\2Xf\5\n\6\fYZ\f\n\2\2Z]\t\4\2\2[^\5\n\6\2\\^\7\26\2\2][\3\2\2\2"+
+		"]\\\3\2\2\2^f\3\2\2\2_`\f\t\2\2`c\t\5\2\2ad\5\n\6\2bd\7\26\2\2ca\3\2\2"+
+		"\2cb\3\2\2\2df\3\2\2\2eV\3\2\2\2eY\3\2\2\2e_\3\2\2\2fi\3\2\2\2ge\3\2\2"+
+		"\2gh\3\2\2\2h\13\3\2\2\2ig\3\2\2\2jk\7\26\2\2kl\7\7\2\2lm\5\n\6\2m\r\3"+
+		"\2\2\2no\7\b\2\2op\7\26\2\2p\17\3\2\2\2qt\7\t\2\2ru\7$\2\2su\5\n\6\2t"+
+		"r\3\2\2\2ts\3\2\2\2uv\3\2\2\2vt\3\2\2\2vw\3\2\2\2w\21\3\2\2\2xy\7\n\2"+
+		"\2yz\5\n\6\2z{\7\3\2\2{|\5\6\4\2|~\7\4\2\2}\177\5\24\13\2~}\3\2\2\2~\177"+
+		"\3\2\2\2\177\23\3\2\2\2\u0080\u0081\7\13\2\2\u0081\u0082\7\3\2\2\u0082"+
+		"\u0083\5\6\4\2\u0083\u0084\7\4\2\2\u0084\25\3\2\2\2\u0085\u0086\7\f\2"+
+		"\2\u0086\u0087\5\n\6\2\u0087\u0088\7\3\2\2\u0088\u0089\5\6\4\2\u0089\u008a"+
+		"\7\4\2\2\u008a\27\3\2\2\2\u008b\u008c\7\r\2\2\u008c\u008d\5\32\16\2\u008d"+
+		"\u008e\7\16\2\2\u008e\u0092\3\2\2\2\u008f\u0090\7\r\2\2\u0090\u0092\7"+
+		"\16\2\2\u0091\u008b\3\2\2\2\u0091\u008f\3\2\2\2\u0092\31\3\2\2\2\u0093"+
+		"\u0097\t\2\2\2\u0094\u0096\5\32\16\2\u0095\u0094\3\2\2\2\u0096\u0099\3"+
+		"\2\2\2\u0097\u0095\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u00a2\3\2\2\2\u0099"+
+		"\u0097\3\2\2\2\u009a\u009e\7\24\2\2\u009b\u009d\5\32\16\2\u009c\u009b"+
+		"\3\2\2\2\u009d\u00a0\3\2\2\2\u009e\u009c\3\2\2\2\u009e\u009f\3\2\2\2\u009f"+
+		"\u00a2\3\2\2\2\u00a0\u009e\3\2\2\2\u00a1\u0093\3\2\2\2\u00a1\u009a\3\2"+
+		"\2\2\u00a2\33\3\2\2\2\u00a3\u00a4\7\17\2\2\u00a4\u00a5\7\26\2\2\u00a5"+
+		"\35\3\2\2\2\u00a6\u00a7\7\26\2\2\u00a7\u00a8\7\20\2\2\u00a8\u00a9\5\n"+
+		"\6\2\u00a9\u00aa\7\21\2\2\u00aa\37\3\2\2\2\u00ab\u00ac\7\26\2\2\u00ac"+
+		"\u00ad\7\22\2\2\u00ad\u00ae\5\n\6\2\u00ae!\3\2\2\2\u00af\u00b0\7\23\2"+
+		"\2\u00b0\u00b1\5\36\20\2\u00b1#\3\2\2\2\23\'/=?FT]cegtv~\u0091\u0097\u009e"+
+		"\u00a1";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

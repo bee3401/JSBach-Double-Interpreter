@@ -18,9 +18,9 @@ public class jsBachLexer extends Lexer {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, KEY=19, NUM=20, VAR=21, PROC=22, MES=23, MENYS=24, MUL=25, DIV=26, 
-		MOD=27, EQ=28, NEQ=29, LT=30, GT=31, LEQ=32, GEQ=33, COMMENT=34, STR=35, 
-		WS=36;
+		T__17=18, KEY=19, NUM=20, VAR=21, METHOD_NAME=22, MES=23, MENYS=24, MUL=25, 
+		DIV=26, MOD=27, EQ=28, NEQ=29, LT=30, GT=31, LEQ=32, GEQ=33, COMMENT=34, 
+		STR=35, WS=36;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -33,8 +33,8 @@ public class jsBachLexer extends Lexer {
 		return new String[] {
 			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
 			"T__9", "T__10", "T__11", "T__12", "T__13", "T__14", "T__15", "T__16", 
-			"T__17", "KEY", "NUM", "VAR", "PROC", "MES", "MENYS", "MUL", "DIV", "MOD", 
-			"EQ", "NEQ", "LT", "GT", "LEQ", "GEQ", "COMMENT", "STR", "WS"
+			"T__17", "KEY", "NUM", "VAR", "METHOD_NAME", "MES", "MENYS", "MUL", "DIV", 
+			"MOD", "EQ", "NEQ", "LT", "GT", "LEQ", "GEQ", "COMMENT", "STR", "WS"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -51,7 +51,7 @@ public class jsBachLexer extends Lexer {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, "KEY", "NUM", "VAR", "PROC", 
+			null, null, null, null, null, null, null, "KEY", "NUM", "VAR", "METHOD_NAME", 
 			"MES", "MENYS", "MUL", "DIV", "MOD", "EQ", "NEQ", "LT", "GT", "LEQ", 
 			"GEQ", "COMMENT", "STR", "WS"
 		};

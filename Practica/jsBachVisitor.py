@@ -14,8 +14,18 @@ class jsBachVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by jsBachParser#function.
+    def visitFunction(self, ctx:jsBachParser.FunctionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by jsBachParser#body.
     def visitBody(self, ctx:jsBachParser.BodyContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsBachParser#method_call.
+    def visitMethod_call(self, ctx:jsBachParser.Method_callContext):
         return self.visitChildren(ctx)
 
 
