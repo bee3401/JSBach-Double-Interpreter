@@ -36,6 +36,8 @@ class EvalVisitor(jsBachVisitor):
         self.methods            = {}
         self.parameters         = parameters
         self.original_values    = {}
+        self.arrays             = {}
+        self.array_accesses     = []
 
         self.current_function = start_function
         self.array            = []
@@ -45,7 +47,7 @@ class EvalVisitor(jsBachVisitor):
         self.read_only        = True
 
     def visitRoot(self, ctx):
-        #print("root")
+        print("root")
         l = list(ctx.getChildren())
         i = 0
 
@@ -64,16 +66,18 @@ class EvalVisitor(jsBachVisitor):
 
         self.visit(self.methods["Main"][0])
         print(self.variables)
+        print(self.arrays)
             
 
     def visitMethod_call(self, ctx):
-        #print("visitMethod_call")
+        print("visitMethod_call")
         l = list(ctx.getChildren())
-
-
-        previous_function = self.current_function
         
         if l[0].getText() in self.methods:
+            print("method exists")
+            previous_function = self.current_function
+            previous_array_accesses = self.array_accesses
+
             function_tag = l[0].getText() + "-" + str(len(self.function_stack))
             #print("method exists")
             # update state of local variables in our current function to variables
@@ -88,30 +92,41 @@ class EvalVisitor(jsBachVisitor):
             # add parameters to local variables
             if len(l) > 1:
                 parameter_values = []
+                array_accesses = []
                 for p in range(1, len(l)):
                     value = self.visit(l[p])
-                    parameter_values.append(value)
-
+                    
+                    if isinstance(value, int):
+                        parameter_values.append(value)
+                    
+                    elif isinstance(value, list):
+                        parameter_values.append(l[p].getText())
+                        array_accesses.append(l[p].getText())
+                    
                 if len(parameter_values) == len(self.methods[l[0].getText()][1]):
                     parameter_names = self.methods[l[0].getText()][1]
                     
                     for i in range(0, len(parameter_values)):
                         new_local_variables[parameter_names[i]] = parameter_values[i]
+                    
+                    self.array_accesses = array_accesses
                 
                 else:
                     raise Exception("Unexpected number of parameters for this function")
 
                 self.local_variables = new_local_variables
-               #prin(self.local_variables)
+                print("THE ONE A NEED IS TIED UP RIGHTNOW")
+                print(self.local_variables)
+                print(self.array_accesses)
             
             #change current function
             self.current_function = function_tag
 
             #call function
-            function = self.methods[l[0].getText()][0]
+            function_pointer = self.methods[l[0].getText()][0]
 
             self.function_stack.append(self.current_function)
-            self.visit(function)
+            self.visit(function_pointer)
 
             #undo everything
             self.variables[self.current_function] = self.local_variables
@@ -125,6 +140,7 @@ class EvalVisitor(jsBachVisitor):
             
             #change current function
             self.current_function = previous_function
+            self.array_accesses = previous_array_accesses
             self.function_stack.pop()
 
         else:
@@ -132,11 +148,11 @@ class EvalVisitor(jsBachVisitor):
 
 
     def visitFunction(self, ctx):
-        #print("visitFunction")
+        print("visitFunction")
         l = list(ctx.getChildren())
         
         if not self.read_only:
-            #print("visitFunction")
+            print("visitFunction no-read")
             #print(len(l))
             if len(l) > 4:
                 #print("function with params")
@@ -154,7 +170,7 @@ class EvalVisitor(jsBachVisitor):
             self.variables[self.current_function] = self.local_variables
         
         else:
-            #print("entra")
+            print("visitFunction read")
             #returns fuction name
             parameters = []
 
@@ -180,27 +196,38 @@ class EvalVisitor(jsBachVisitor):
         #return "INFO :: ended body"
 
     def visitExpr(self, ctx):
-        #print("visitExpr")
+        print("visitExpr")
         l = list(ctx.getChildren())
         i = 0 # remains 0 if there is no brackets in the expression
         
         if len(l) == 1:
             
             txt = l[0].getText()
+            print(txt)
+            print(self.array_accesses)
             #numeric value 
             if txt.isnumeric():
-                #print("numeric " + txt)
+                print("numeric " + txt)
                 return int(txt)
+            
             #variable
             elif txt in self.local_variables:
-                #print("variable " + txt)
+                print("variable " + txt)
                 ##print("value" + str(self.local_variables[txt]))
                 return self.local_variables[txt]
             
+            #management for arrays stored in variables
+            elif txt in self.array_accesses and txt in self.arrays:
+                print("array variable  " + txt)
+                return self.arrays[txt]
+            
             # elif for array management 
-            else:
-                #print("array " + txt)
+            elif txt[0] == '{':
+                print("array " + txt)
                 return self.visit(l[0])
+            
+            else:
+                raise Exception("Invalid element or unaccessible array")
                 
         else:
             if l[0].getText() == '(':
@@ -240,27 +267,48 @@ class EvalVisitor(jsBachVisitor):
                     return 0
 
     def visitAssig(self, ctx):
-        #print("visitAssig")
+        print("visitAssig")
         l = list(ctx.getChildren())
         #print(l[2].getText())
         #print("back?????????")
         #print(x)
+        value = self.visit(l[2])
+        print("here")
+        print(value)
         try:
-            #print("try block start")
+            print("try block start")
             #print(l[2].getText())
-            self.local_variables[l[0].getText()] = int(self.visit(l[2]))
-            #print("try block end")
+            #self.local_variables[l[0].getText()] = int(self.visit(l[2]))
+            if isinstance(value, int):
+                print("assign int value")
+                self.local_variables[l[0].getText()] = value
+        
+            elif isinstance(value, list):
+                print("assign array variable")
+                self.arrays[l[0].getText()] = value
+                self.array_accesses.append(l[0].getText())
+            else:
+                print("direct array")
+                self.arrays[l[0].getText()] = self.array
+                self.array = []
+                self.array_accesses.append(l[0].getText())
+        
         except:
-            #print("except block start")
+            print("except block start")
             #print(self.array)
-            self.local_variables[l[0].getText()] = self.array
-            self.array = []
-           #prin("except block end")
-       #prin(self.local_variables)
+            
+            #self.local_variables[l[0].getText()] = self.array
+            #self.array = []
+            print("assign direct array")
+            
+            
+            print("except block end")
+        #prin(self.local_variables)
         #return "INFO :: added variable successfully"
+        print(self.array_accesses)
 
     def visitRead(self, ctx):
-       #prin("visitRead")
+        print("visitRead")
         l = list(ctx.getChildren())
 
         #TODO: probably might need to change this in a minute, when you add the Key thingies
@@ -270,7 +318,7 @@ class EvalVisitor(jsBachVisitor):
         #return "INFO :: value read successfully"
 
     def visitWrite(self, ctx):
-       #prin("visitWrite")
+        print("visitWrite")
         l = list(ctx.getChildren())
         #TODO: same thing; control over Keys and regular strings
         output = ""
@@ -314,7 +362,7 @@ class EvalVisitor(jsBachVisitor):
         #return "INFO :: exit while: condition not met any longer"
 
     def visitArray(self, ctx):
-       #prin("visitArray")
+        print("visitArray")
         l = list(ctx.getChildren())
         i = 0
         
@@ -323,7 +371,7 @@ class EvalVisitor(jsBachVisitor):
         #probably need a structure for arrays or use the variable one
 
     def visitNumsNkeys(self, ctx):
-       #prin("visitNumsNKeys")
+        print("visitNumsNKeys")
         l = list(ctx.getChildren())
         
         if l[0].getText() not in self.keys:
@@ -335,13 +383,13 @@ class EvalVisitor(jsBachVisitor):
             raise Exception("not implemented yet")
         
     def visitGetElem(self, ctx):
-       #prin("visitGetElement")
+        print("visitGetElement")
         l = list(ctx.getChildren())
 
         var = l[0].getText()
         
-        if var in self.local_variables and isinstance(self.local_variables[var], list):            
-            array = self.local_variables[var]
+        if var in self.arrays:  #self.local_variables and isinstance(self.local_variables[var], list):            
+            array = self.arrays[var]
             
             if l[2].getText() in self.local_variables:
                 i = int(self.visit(l[2]))
@@ -354,6 +402,7 @@ class EvalVisitor(jsBachVisitor):
             
             if i in range(0, len(array)):
                 return array[i]
+            
             else:
                 raise Exception("Index out of bounds")
         
@@ -361,39 +410,43 @@ class EvalVisitor(jsBachVisitor):
             raise Exception("Array not found") 
                                 
     def visitGetLength(self, ctx):
-       #prin("getLength")
+        print("getLength")
         l = list(ctx.getChildren())
         
         var = l[1].getText()
         #print("var " + var)
         #print(self.local_variables[var])
         
-        if var in self.local_variables and isinstance(self.local_variables[var], list):
+        if var in self.arrays: #self.local_variables and isinstance(self.local_variables[var], list):
             #print("entra if")
             #print(len(self.local_variables[var]))
-            return len(self.local_variables[var])
+            return len(self.arrays[var])#len(self.local_variables[var])
         
         else:
             raise Exception("Array not found") 
 
     def visitAddElem(self, ctx):
-       #prin("visitAddElem")
+        print("visitAddElem")
         l = list(ctx.getChildren())
         var = l[0].getText()
         
-        if var in self.local_variables and isinstance(self.local_variables[var], list):
+        if var in self.arrays: #self.local_variables and isinstance(self.local_variables[var], list):
             x = self.visit(l[2])
             
             #print("print value that has to be concatenated: ")
             #print(x)
 
             if isinstance(x, int):
-                self.local_variables[var].append(x)
+                #self.local_variables[var].append(x)
+                self.arrays[var].append(x)
             
             elif isinstance(x, list):  
-                self.local_variables[var] += x
+                #self.local_variables[var] += x
+                self.arrays[var] += x
+            
             elif self.array:
-                self.local_variables[var] += self.array
+                #self.local_variables[var] += self.array
+                self.arrays[var] += self.array
                 self.array = []
             
         
@@ -401,13 +454,14 @@ class EvalVisitor(jsBachVisitor):
             raise Exception("Variable not found or variable is not array")
     
     def visitRmElem(self, ctx):
-       #prin("RmElem")
+        print("RmElem")
         l = list(ctx.getChildren())
         x = self.visit(l[1])
         var = l[1].getText()[0]
         #print(var)
         try:
-            self.local_variables[var].remove(x)
+            #self.local_variables[var].remove(x)
+            self.arrays[var].remove(X)
         
         except:
             raise Exception("Value not in array")
