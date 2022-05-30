@@ -70,16 +70,18 @@ class EvalVisitor(jsBachVisitor):
         #print("visitMethod_call")
         l = list(ctx.getChildren())
 
+
         previous_function = self.current_function
         
         if l[0].getText() in self.methods:
+            function_tag = l[0].getText() + "-" + str(len(self.function_stack))
             #print("method exists")
             # update state of local variables in our current function to variables
             self.variables[self.current_function] = self.local_variables
 
             # change scope
             if l[0].getText() in self.variables:
-                new_local_variables = self.variables[l[0].getText()]
+                new_local_variables = self.variables[function_tag]
             else:
                 new_local_variables = {}
             
@@ -92,6 +94,7 @@ class EvalVisitor(jsBachVisitor):
 
                 if len(parameter_values) == len(self.methods[l[0].getText()][1]):
                     parameter_names = self.methods[l[0].getText()][1]
+                    
                     for i in range(0, len(parameter_values)):
                         new_local_variables[parameter_names[i]] = parameter_values[i]
                 
@@ -102,10 +105,10 @@ class EvalVisitor(jsBachVisitor):
                #prin(self.local_variables)
             
             #change current function
-            self.current_function = l[0].getText()
+            self.current_function = function_tag
 
             #call function
-            function = self.methods[self.current_function][0]
+            function = self.methods[l[0].getText()][0]
 
             self.function_stack.append(self.current_function)
             self.visit(function)
@@ -114,11 +117,11 @@ class EvalVisitor(jsBachVisitor):
             self.variables[self.current_function] = self.local_variables
 
             # change scope
-            new_local_variables = self.variables[previous_function]
+            old_local_variables = self.variables[previous_function]
            
             # add parameters to local variables
             
-            self.local_variables = new_local_variables
+            self.local_variables = old_local_variables
             
             #change current function
             self.current_function = previous_function
@@ -273,13 +276,13 @@ class EvalVisitor(jsBachVisitor):
         output = ""
         for i in range(1, len(l)):
             if l[i].getText()[0] == '"': #isinstance(l[1].getText(), str) and l[1].getText() not in self.local_variables:  
-                output += str(l[i].getText())
+                output += str(l[i].getText()).replace('"', ' ')
 
             else:
-                output += str(self.visit(l[i]))
+                output += str(self.visit(l[i])).replace('"', ' ')
 
             output += " "
-            print(output)
+        print(output)
 
 
     def visitIf_block(self, ctx):
