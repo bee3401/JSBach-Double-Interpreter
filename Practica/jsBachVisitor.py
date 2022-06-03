@@ -49,6 +49,11 @@ class jsBachVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by jsBachParser#play.
+    def visitPlay(self, ctx:jsBachParser.PlayContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by jsBachParser#if_block.
     def visitIf_block(self, ctx:jsBachParser.If_blockContext):
         return self.visitChildren(ctx)
