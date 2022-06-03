@@ -35,7 +35,7 @@ def decode_key(key):
 
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
     letter = key[0]
-    number = '4'
+    number = '4'        # C4 default 
     if len(key) > 1 :
         number = key[1]
     
@@ -465,6 +465,7 @@ class EvalVisitor(jsBachVisitor):
         
     def visitPlay(self, ctx):
         l = list(ctx.getChildren())
+        
 
 
 
