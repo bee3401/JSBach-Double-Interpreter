@@ -1,4 +1,4 @@
-// Generated from /Users/beaadc/Documents/GitHub/JSBach-Double-Interpreter/Practica/jsBach.g4 by ANTLR 4.8
+// Generated from /Users/beaadc/Documents/GitHub/JSBach-Double-Interpreter/Practica/jsBach.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class jsBachParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -39,7 +39,7 @@ public class jsBachParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'|:'", "':|'", "'('", "')'", "'<-'", "'<?>'", "'<!>'", "'<:>'", 
-			"'if'", "'else'", "'while'", "'{'", "'}'", "'#'", "'['", "']'", "'<<'", 
+			"'{'", "'}'", "'if'", "'else'", "'while'", "'#'", "'['", "']'", "'<<'", 
 			"'8<'", null, null, null, null, "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", 
 			"'/='", "'<'", "'>'", "'<='", "'>='"
 		};
@@ -236,6 +236,12 @@ public class jsBachParser extends Parser {
 		public WriteContext write(int i) {
 			return getRuleContext(WriteContext.class,i);
 		}
+		public List<PlayContext> play() {
+			return getRuleContexts(PlayContext.class);
+		}
+		public PlayContext play(int i) {
+			return getRuleContext(PlayContext.class,i);
+		}
 		public List<If_blockContext> if_block() {
 			return getRuleContexts(If_blockContext.class);
 		}
@@ -267,12 +273,12 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(64);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << T__6) | (1L << T__8) | (1L << T__10) | (1L << T__11) | (1L << T__13) | (1L << T__17) | (1L << NUM) | (1L << VAR) | (1L << METHOD_NAME))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__10) | (1L << T__12) | (1L << T__13) | (1L << T__17) | (1L << NUM) | (1L << VAR) | (1L << METHOD_NAME))) != 0)) {
 				{
-				setState(61);
+				setState(62);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 				case 1:
@@ -302,24 +308,30 @@ public class jsBachParser extends Parser {
 				case 5:
 					{
 					setState(58);
-					if_block();
+					play();
 					}
 					break;
 				case 6:
 					{
 					setState(59);
-					while_block();
+					if_block();
 					}
 					break;
 				case 7:
 					{
 					setState(60);
+					while_block();
+					}
+					break;
+				case 8:
+					{
+					setState(61);
 					method_call();
 					}
 					break;
 				}
 				}
-				setState(65);
+				setState(66);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -357,21 +369,21 @@ public class jsBachParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66);
+			setState(67);
 			match(METHOD_NAME);
-			setState(70);
+			setState(71);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(67);
+					setState(68);
 					expr(0);
 					}
 					} 
 				}
-				setState(72);
+				setState(73);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
@@ -444,22 +456,22 @@ public class jsBachParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(84);
+			setState(85);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				{
-				setState(74);
-				match(T__2);
 				setState(75);
-				expr(0);
+				match(T__2);
 				setState(76);
+				expr(0);
+				setState(77);
 				match(T__3);
 				}
 				break;
 			case 2:
 				{
-				setState(78);
+				setState(79);
 				_la = _input.LA(1);
 				if ( !(_la==NUM || _la==VAR) ) {
 				_errHandler.recoverInline(this);
@@ -473,37 +485,37 @@ public class jsBachParser extends Parser {
 				break;
 			case 3:
 				{
-				setState(79);
+				setState(80);
 				array();
 				}
 				break;
 			case 4:
 				{
-				setState(80);
+				setState(81);
 				getElem();
 				}
 				break;
 			case 5:
 				{
-				setState(81);
+				setState(82);
 				getLength();
 				}
 				break;
 			case 6:
 				{
-				setState(82);
+				setState(83);
 				addElem();
 				}
 				break;
 			case 7:
 				{
-				setState(83);
+				setState(84);
 				rmElem();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(103);
+			setState(104);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -511,16 +523,16 @@ public class jsBachParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(101);
+					setState(102);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(86);
-						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						setState(87);
+						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
+						setState(88);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << NEQ) | (1L << LT) | (1L << GT) | (1L << LEQ) | (1L << GEQ))) != 0)) ) {
 						_errHandler.recoverInline(this);
@@ -530,7 +542,7 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(88);
+						setState(89);
 						expr(10);
 						}
 						break;
@@ -538,9 +550,9 @@ public class jsBachParser extends Parser {
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(89);
-						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						setState(90);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						setState(91);
 						_la = _input.LA(1);
 						if ( !(_la==MUL || _la==DIV) ) {
 						_errHandler.recoverInline(this);
@@ -550,18 +562,18 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(93);
+						setState(94);
 						_errHandler.sync(this);
 						switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 						case 1:
 							{
-							setState(91);
+							setState(92);
 							expr(0);
 							}
 							break;
 						case 2:
 							{
-							setState(92);
+							setState(93);
 							match(VAR);
 							}
 							break;
@@ -572,9 +584,9 @@ public class jsBachParser extends Parser {
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(95);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(96);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(97);
 						_la = _input.LA(1);
 						if ( !(_la==MES || _la==MENYS) ) {
 						_errHandler.recoverInline(this);
@@ -584,18 +596,18 @@ public class jsBachParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(99);
+						setState(100);
 						_errHandler.sync(this);
 						switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 						case 1:
 							{
-							setState(97);
+							setState(98);
 							expr(0);
 							}
 							break;
 						case 2:
 							{
-							setState(98);
+							setState(99);
 							match(VAR);
 							}
 							break;
@@ -605,7 +617,7 @@ public class jsBachParser extends Parser {
 					}
 					} 
 				}
-				setState(105);
+				setState(106);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			}
@@ -639,11 +651,11 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
-			match(VAR);
 			setState(107);
-			match(T__4);
+			match(VAR);
 			setState(108);
+			match(T__4);
+			setState(109);
 			expr(0);
 			}
 		}
@@ -672,9 +684,9 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
-			match(T__5);
 			setState(111);
+			match(T__5);
+			setState(112);
 			match(VAR);
 			}
 		}
@@ -713,32 +725,32 @@ public class jsBachParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(114);
 			match(T__6);
-			setState(116); 
+			setState(117); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					setState(116);
+					setState(117);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case STR:
 						{
-						setState(114);
+						setState(115);
 						match(STR);
 						}
 						break;
 					case T__2:
-					case T__11:
+					case T__8:
 					case T__13:
 					case T__17:
 					case NUM:
 					case VAR:
 						{
-						setState(115);
+						setState(116);
 						expr(0);
 						}
 						break;
@@ -750,7 +762,7 @@ public class jsBachParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(118); 
+				setState(119); 
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
@@ -769,8 +781,8 @@ public class jsBachParser extends Parser {
 
 	public static class PlayContext extends ParserRuleContext {
 		public TerminalNode KEY() { return getToken(jsBachParser.KEY, 0); }
-		public ArrayContext array() {
-			return getRuleContext(ArrayContext.class,0);
+		public NumsNkeysContext numsNkeys() {
+			return getRuleContext(NumsNkeysContext.class,0);
 		}
 		public PlayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -784,21 +796,25 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(120);
+			setState(121);
 			match(T__7);
-			setState(123);
+			setState(127);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case KEY:
 				{
-				setState(121);
+				setState(122);
 				match(KEY);
 				}
 				break;
-			case T__11:
+			case T__8:
 				{
-				setState(122);
-				array();
+				setState(123);
+				match(T__8);
+				setState(124);
+				numsNkeys();
+				setState(125);
+				match(T__9);
 				}
 				break;
 			default:
@@ -840,22 +856,22 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
-			match(T__8);
-			setState(126);
-			expr(0);
-			setState(127);
-			match(T__0);
-			setState(128);
-			body();
 			setState(129);
-			match(T__1);
+			match(T__10);
+			setState(130);
+			expr(0);
 			setState(131);
+			match(T__0);
+			setState(132);
+			body();
+			setState(133);
+			match(T__1);
+			setState(135);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__9) {
+			if (_la==T__11) {
 				{
-				setState(130);
+				setState(134);
 				else_block();
 				}
 			}
@@ -889,13 +905,13 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(133);
-			match(T__9);
-			setState(134);
+			setState(137);
+			match(T__11);
+			setState(138);
 			match(T__0);
-			setState(135);
+			setState(139);
 			body();
-			setState(136);
+			setState(140);
 			match(T__1);
 			}
 		}
@@ -929,15 +945,15 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(138);
-			match(T__10);
-			setState(139);
-			expr(0);
-			setState(140);
-			match(T__0);
-			setState(141);
-			body();
 			setState(142);
+			match(T__12);
+			setState(143);
+			expr(0);
+			setState(144);
+			match(T__0);
+			setState(145);
+			body();
+			setState(146);
 			match(T__1);
 			}
 		}
@@ -966,27 +982,27 @@ public class jsBachParser extends Parser {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_array);
 		try {
-			setState(150);
+			setState(154);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(144);
-				match(T__11);
-				setState(145);
+				setState(148);
+				match(T__8);
+				setState(149);
 				numsNkeys();
-				setState(146);
-				match(T__12);
+				setState(150);
+				match(T__9);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(148);
-				match(T__11);
-				setState(149);
-				match(T__12);
+				setState(152);
+				match(T__8);
+				setState(153);
+				match(T__9);
 				}
 				break;
 			}
@@ -1024,14 +1040,14 @@ public class jsBachParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			setState(166);
+			setState(170);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NUM:
 			case VAR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(152);
+				setState(156);
 				_la = _input.LA(1);
 				if ( !(_la==NUM || _la==VAR) ) {
 				_errHandler.recoverInline(this);
@@ -1041,19 +1057,19 @@ public class jsBachParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(156);
+				setState(160);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(153);
+						setState(157);
 						numsNkeys();
 						}
 						} 
 					}
-					setState(158);
+					setState(162);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 				}
@@ -1062,21 +1078,21 @@ public class jsBachParser extends Parser {
 			case KEY:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(159);
-				match(KEY);
 				setState(163);
+				match(KEY);
+				setState(167);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(160);
+						setState(164);
 						numsNkeys();
 						}
 						} 
 					}
-					setState(165);
+					setState(169);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
 				}
@@ -1111,9 +1127,9 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(168);
+			setState(172);
 			match(T__13);
-			setState(169);
+			setState(173);
 			match(VAR);
 			}
 		}
@@ -1145,13 +1161,13 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(171);
+			setState(175);
 			match(VAR);
-			setState(172);
+			setState(176);
 			match(T__14);
-			setState(173);
+			setState(177);
 			expr(0);
-			setState(174);
+			setState(178);
 			match(T__15);
 			}
 		}
@@ -1183,11 +1199,11 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(176);
+			setState(180);
 			match(VAR);
-			setState(177);
+			setState(181);
 			match(T__16);
-			setState(178);
+			setState(182);
 			expr(0);
 			}
 		}
@@ -1218,9 +1234,9 @@ public class jsBachParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(180);
+			setState(184);
 			match(T__17);
-			setState(181);
+			setState(185);
 			getElem();
 			}
 		}
@@ -1255,61 +1271,62 @@ public class jsBachParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u00ba\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u00be\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\3\2\6\2(\n\2\r\2\16\2)\3\2\3\2\3\3\3\3\7\3\60\n\3\f\3\16\3"+
-		"\63\13\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4@\n\4\f\4\16\4"+
-		"C\13\4\3\5\3\5\7\5G\n\5\f\5\16\5J\13\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\5\6W\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6`\n\6\3\6\3\6\3\6"+
-		"\3\6\5\6f\n\6\7\6h\n\6\f\6\16\6k\13\6\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\t"+
-		"\3\t\3\t\6\tw\n\t\r\t\16\tx\3\n\3\n\3\n\5\n~\n\n\3\13\3\13\3\13\3\13\3"+
-		"\13\3\13\5\13\u0086\n\13\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3"+
-		"\16\3\16\3\16\3\16\3\16\3\16\5\16\u0099\n\16\3\17\3\17\7\17\u009d\n\17"+
-		"\f\17\16\17\u00a0\13\17\3\17\3\17\7\17\u00a4\n\17\f\17\16\17\u00a7\13"+
-		"\17\5\17\u00a9\n\17\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22"+
-		"\3\22\3\22\3\23\3\23\3\23\3\23\2\3\n\24\2\4\6\b\n\f\16\20\22\24\26\30"+
-		"\32\34\36 \"$\2\6\3\2\26\27\3\2\36#\3\2\33\34\3\2\31\32\2\u00c4\2\'\3"+
-		"\2\2\2\4-\3\2\2\2\6A\3\2\2\2\bD\3\2\2\2\nV\3\2\2\2\fl\3\2\2\2\16p\3\2"+
-		"\2\2\20s\3\2\2\2\22z\3\2\2\2\24\177\3\2\2\2\26\u0087\3\2\2\2\30\u008c"+
-		"\3\2\2\2\32\u0098\3\2\2\2\34\u00a8\3\2\2\2\36\u00aa\3\2\2\2 \u00ad\3\2"+
-		"\2\2\"\u00b2\3\2\2\2$\u00b6\3\2\2\2&(\5\4\3\2\'&\3\2\2\2()\3\2\2\2)\'"+
-		"\3\2\2\2)*\3\2\2\2*+\3\2\2\2+,\7\2\2\3,\3\3\2\2\2-\61\7\30\2\2.\60\7\27"+
-		"\2\2/.\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\64\3\2\2\2\63"+
-		"\61\3\2\2\2\64\65\7\3\2\2\65\66\5\6\4\2\66\67\7\4\2\2\67\5\3\2\2\28@\5"+
-		"\n\6\29@\5\f\7\2:@\5\16\b\2;@\5\20\t\2<@\5\24\13\2=@\5\30\r\2>@\5\b\5"+
-		"\2?8\3\2\2\2?9\3\2\2\2?:\3\2\2\2?;\3\2\2\2?<\3\2\2\2?=\3\2\2\2?>\3\2\2"+
-		"\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2B\7\3\2\2\2CA\3\2\2\2DH\7\30\2\2EG\5\n"+
-		"\6\2FE\3\2\2\2GJ\3\2\2\2HF\3\2\2\2HI\3\2\2\2I\t\3\2\2\2JH\3\2\2\2KL\b"+
-		"\6\1\2LM\7\5\2\2MN\5\n\6\2NO\7\6\2\2OW\3\2\2\2PW\t\2\2\2QW\5\32\16\2R"+
-		"W\5 \21\2SW\5\36\20\2TW\5\"\22\2UW\5$\23\2VK\3\2\2\2VP\3\2\2\2VQ\3\2\2"+
-		"\2VR\3\2\2\2VS\3\2\2\2VT\3\2\2\2VU\3\2\2\2Wi\3\2\2\2XY\f\13\2\2YZ\t\3"+
-		"\2\2Zh\5\n\6\f[\\\f\n\2\2\\_\t\4\2\2]`\5\n\6\2^`\7\27\2\2_]\3\2\2\2_^"+
-		"\3\2\2\2`h\3\2\2\2ab\f\t\2\2be\t\5\2\2cf\5\n\6\2df\7\27\2\2ec\3\2\2\2"+
-		"ed\3\2\2\2fh\3\2\2\2gX\3\2\2\2g[\3\2\2\2ga\3\2\2\2hk\3\2\2\2ig\3\2\2\2"+
-		"ij\3\2\2\2j\13\3\2\2\2ki\3\2\2\2lm\7\27\2\2mn\7\7\2\2no\5\n\6\2o\r\3\2"+
-		"\2\2pq\7\b\2\2qr\7\27\2\2r\17\3\2\2\2sv\7\t\2\2tw\7%\2\2uw\5\n\6\2vt\3"+
-		"\2\2\2vu\3\2\2\2wx\3\2\2\2xv\3\2\2\2xy\3\2\2\2y\21\3\2\2\2z}\7\n\2\2{"+
-		"~\7\25\2\2|~\5\32\16\2}{\3\2\2\2}|\3\2\2\2~\23\3\2\2\2\177\u0080\7\13"+
-		"\2\2\u0080\u0081\5\n\6\2\u0081\u0082\7\3\2\2\u0082\u0083\5\6\4\2\u0083"+
-		"\u0085\7\4\2\2\u0084\u0086\5\26\f\2\u0085\u0084\3\2\2\2\u0085\u0086\3"+
-		"\2\2\2\u0086\25\3\2\2\2\u0087\u0088\7\f\2\2\u0088\u0089\7\3\2\2\u0089"+
-		"\u008a\5\6\4\2\u008a\u008b\7\4\2\2\u008b\27\3\2\2\2\u008c\u008d\7\r\2"+
-		"\2\u008d\u008e\5\n\6\2\u008e\u008f\7\3\2\2\u008f\u0090\5\6\4\2\u0090\u0091"+
-		"\7\4\2\2\u0091\31\3\2\2\2\u0092\u0093\7\16\2\2\u0093\u0094\5\34\17\2\u0094"+
-		"\u0095\7\17\2\2\u0095\u0099\3\2\2\2\u0096\u0097\7\16\2\2\u0097\u0099\7"+
-		"\17\2\2\u0098\u0092\3\2\2\2\u0098\u0096\3\2\2\2\u0099\33\3\2\2\2\u009a"+
-		"\u009e\t\2\2\2\u009b\u009d\5\34\17\2\u009c\u009b\3\2\2\2\u009d\u00a0\3"+
-		"\2\2\2\u009e\u009c\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a9\3\2\2\2\u00a0"+
-		"\u009e\3\2\2\2\u00a1\u00a5\7\25\2\2\u00a2\u00a4\5\34\17\2\u00a3\u00a2"+
-		"\3\2\2\2\u00a4\u00a7\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6"+
-		"\u00a9\3\2\2\2\u00a7\u00a5\3\2\2\2\u00a8\u009a\3\2\2\2\u00a8\u00a1\3\2"+
-		"\2\2\u00a9\35\3\2\2\2\u00aa\u00ab\7\20\2\2\u00ab\u00ac\7\27\2\2\u00ac"+
-		"\37\3\2\2\2\u00ad\u00ae\7\27\2\2\u00ae\u00af\7\21\2\2\u00af\u00b0\5\n"+
-		"\6\2\u00b0\u00b1\7\22\2\2\u00b1!\3\2\2\2\u00b2\u00b3\7\27\2\2\u00b3\u00b4"+
-		"\7\23\2\2\u00b4\u00b5\5\n\6\2\u00b5#\3\2\2\2\u00b6\u00b7\7\24\2\2\u00b7"+
-		"\u00b8\5 \21\2\u00b8%\3\2\2\2\24)\61?AHV_egivx}\u0085\u0098\u009e\u00a5"+
-		"\u00a8";
+		"\63\13\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4A\n\4\f\4"+
+		"\16\4D\13\4\3\5\3\5\7\5H\n\5\f\5\16\5K\13\5\3\6\3\6\3\6\3\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\5\6X\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6a\n\6\3\6\3"+
+		"\6\3\6\3\6\5\6g\n\6\7\6i\n\6\f\6\16\6l\13\6\3\7\3\7\3\7\3\7\3\b\3\b\3"+
+		"\b\3\t\3\t\3\t\6\tx\n\t\r\t\16\ty\3\n\3\n\3\n\3\n\3\n\3\n\5\n\u0082\n"+
+		"\n\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u008a\n\13\3\f\3\f\3\f\3\f\3\f\3"+
+		"\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\5\16\u009d\n\16\3"+
+		"\17\3\17\7\17\u00a1\n\17\f\17\16\17\u00a4\13\17\3\17\3\17\7\17\u00a8\n"+
+		"\17\f\17\16\17\u00ab\13\17\5\17\u00ad\n\17\3\20\3\20\3\20\3\21\3\21\3"+
+		"\21\3\21\3\21\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\2\3\n\24\2\4\6\b"+
+		"\n\f\16\20\22\24\26\30\32\34\36 \"$\2\6\3\2\26\27\3\2\36#\3\2\33\34\3"+
+		"\2\31\32\2\u00c9\2\'\3\2\2\2\4-\3\2\2\2\6B\3\2\2\2\bE\3\2\2\2\nW\3\2\2"+
+		"\2\fm\3\2\2\2\16q\3\2\2\2\20t\3\2\2\2\22{\3\2\2\2\24\u0083\3\2\2\2\26"+
+		"\u008b\3\2\2\2\30\u0090\3\2\2\2\32\u009c\3\2\2\2\34\u00ac\3\2\2\2\36\u00ae"+
+		"\3\2\2\2 \u00b1\3\2\2\2\"\u00b6\3\2\2\2$\u00ba\3\2\2\2&(\5\4\3\2\'&\3"+
+		"\2\2\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*+\3\2\2\2+,\7\2\2\3,\3\3\2\2\2-"+
+		"\61\7\30\2\2.\60\7\27\2\2/.\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3"+
+		"\2\2\2\62\64\3\2\2\2\63\61\3\2\2\2\64\65\7\3\2\2\65\66\5\6\4\2\66\67\7"+
+		"\4\2\2\67\5\3\2\2\28A\5\n\6\29A\5\f\7\2:A\5\16\b\2;A\5\20\t\2<A\5\22\n"+
+		"\2=A\5\24\13\2>A\5\30\r\2?A\5\b\5\2@8\3\2\2\2@9\3\2\2\2@:\3\2\2\2@;\3"+
+		"\2\2\2@<\3\2\2\2@=\3\2\2\2@>\3\2\2\2@?\3\2\2\2AD\3\2\2\2B@\3\2\2\2BC\3"+
+		"\2\2\2C\7\3\2\2\2DB\3\2\2\2EI\7\30\2\2FH\5\n\6\2GF\3\2\2\2HK\3\2\2\2I"+
+		"G\3\2\2\2IJ\3\2\2\2J\t\3\2\2\2KI\3\2\2\2LM\b\6\1\2MN\7\5\2\2NO\5\n\6\2"+
+		"OP\7\6\2\2PX\3\2\2\2QX\t\2\2\2RX\5\32\16\2SX\5 \21\2TX\5\36\20\2UX\5\""+
+		"\22\2VX\5$\23\2WL\3\2\2\2WQ\3\2\2\2WR\3\2\2\2WS\3\2\2\2WT\3\2\2\2WU\3"+
+		"\2\2\2WV\3\2\2\2Xj\3\2\2\2YZ\f\13\2\2Z[\t\3\2\2[i\5\n\6\f\\]\f\n\2\2]"+
+		"`\t\4\2\2^a\5\n\6\2_a\7\27\2\2`^\3\2\2\2`_\3\2\2\2ai\3\2\2\2bc\f\t\2\2"+
+		"cf\t\5\2\2dg\5\n\6\2eg\7\27\2\2fd\3\2\2\2fe\3\2\2\2gi\3\2\2\2hY\3\2\2"+
+		"\2h\\\3\2\2\2hb\3\2\2\2il\3\2\2\2jh\3\2\2\2jk\3\2\2\2k\13\3\2\2\2lj\3"+
+		"\2\2\2mn\7\27\2\2no\7\7\2\2op\5\n\6\2p\r\3\2\2\2qr\7\b\2\2rs\7\27\2\2"+
+		"s\17\3\2\2\2tw\7\t\2\2ux\7%\2\2vx\5\n\6\2wu\3\2\2\2wv\3\2\2\2xy\3\2\2"+
+		"\2yw\3\2\2\2yz\3\2\2\2z\21\3\2\2\2{\u0081\7\n\2\2|\u0082\7\25\2\2}~\7"+
+		"\13\2\2~\177\5\34\17\2\177\u0080\7\f\2\2\u0080\u0082\3\2\2\2\u0081|\3"+
+		"\2\2\2\u0081}\3\2\2\2\u0082\23\3\2\2\2\u0083\u0084\7\r\2\2\u0084\u0085"+
+		"\5\n\6\2\u0085\u0086\7\3\2\2\u0086\u0087\5\6\4\2\u0087\u0089\7\4\2\2\u0088"+
+		"\u008a\5\26\f\2\u0089\u0088\3\2\2\2\u0089\u008a\3\2\2\2\u008a\25\3\2\2"+
+		"\2\u008b\u008c\7\16\2\2\u008c\u008d\7\3\2\2\u008d\u008e\5\6\4\2\u008e"+
+		"\u008f\7\4\2\2\u008f\27\3\2\2\2\u0090\u0091\7\17\2\2\u0091\u0092\5\n\6"+
+		"\2\u0092\u0093\7\3\2\2\u0093\u0094\5\6\4\2\u0094\u0095\7\4\2\2\u0095\31"+
+		"\3\2\2\2\u0096\u0097\7\13\2\2\u0097\u0098\5\34\17\2\u0098\u0099\7\f\2"+
+		"\2\u0099\u009d\3\2\2\2\u009a\u009b\7\13\2\2\u009b\u009d\7\f\2\2\u009c"+
+		"\u0096\3\2\2\2\u009c\u009a\3\2\2\2\u009d\33\3\2\2\2\u009e\u00a2\t\2\2"+
+		"\2\u009f\u00a1\5\34\17\2\u00a0\u009f\3\2\2\2\u00a1\u00a4\3\2\2\2\u00a2"+
+		"\u00a0\3\2\2\2\u00a2\u00a3\3\2\2\2\u00a3\u00ad\3\2\2\2\u00a4\u00a2\3\2"+
+		"\2\2\u00a5\u00a9\7\25\2\2\u00a6\u00a8\5\34\17\2\u00a7\u00a6\3\2\2\2\u00a8"+
+		"\u00ab\3\2\2\2\u00a9\u00a7\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00ad\3\2"+
+		"\2\2\u00ab\u00a9\3\2\2\2\u00ac\u009e\3\2\2\2\u00ac\u00a5\3\2\2\2\u00ad"+
+		"\35\3\2\2\2\u00ae\u00af\7\20\2\2\u00af\u00b0\7\27\2\2\u00b0\37\3\2\2\2"+
+		"\u00b1\u00b2\7\27\2\2\u00b2\u00b3\7\21\2\2\u00b3\u00b4\5\n\6\2\u00b4\u00b5"+
+		"\7\22\2\2\u00b5!\3\2\2\2\u00b6\u00b7\7\27\2\2\u00b7\u00b8\7\23\2\2\u00b8"+
+		"\u00b9\5\n\6\2\u00b9#\3\2\2\2\u00ba\u00bb\7\24\2\2\u00bb\u00bc\5 \21\2"+
+		"\u00bc%\3\2\2\2\24)\61@BIW`fhjwy\u0081\u0089\u009c\u00a2\u00a9\u00ac";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

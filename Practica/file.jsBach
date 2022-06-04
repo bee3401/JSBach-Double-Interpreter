@@ -1,8 +1,6 @@
-Main |:
-    a <- {1 2 3 4}
-    Funct a
+~~~ Kleines Program in JSBach ~~~
 
-:|
-Funct a |:
-    <!> a
+Main |:
+    <!> "Hallo Bach"
+    <:> {B A C}
 :|

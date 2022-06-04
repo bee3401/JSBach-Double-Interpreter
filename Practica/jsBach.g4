@@ -8,6 +8,7 @@ body:   (    expr
         |   assig
         |   read
         |   write
+        |   play
         |   if_block
         |   while_block
         |   method_call
@@ -30,9 +31,9 @@ expr :  '(' expr ')'
 
 assig: VAR '<-' expr;
 
-read      : '<?>'  VAR                      ;
-write     : '<!>'  (STR | expr)+            ;
-play      : '<:>'  (KEY | array)            ;
+read      : '<?>'  VAR                          ;
+write     : '<!>'  (STR | expr)+                ;
+play      : '<:>'  (KEY | '{' numsNkeys '}')    ;
 
 if_block: 'if' expr  '|:' body ':|' else_block?;
 else_block: 'else' '|:' body ':|';
@@ -48,7 +49,7 @@ getElem     :   VAR'['expr']'       ;
 addElem     :   VAR '<<' expr       ;
 rmElem      :   '8<' getElem        ;
 
-KEY             : [A-G] [0-8]               ; 
+KEY             : [A-G] [0-8]?              ; //? since no numeric value mean C4 D4 .. B4
 NUM             : [0-9]+                    ;
 VAR             : [a-z] [a-zA-Z_0-9]*       ;
 METHOD_NAME     : [A-Z] [a-zA-Z_0-9]*       ;

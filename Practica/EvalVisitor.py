@@ -1,7 +1,7 @@
 from array import array
 from statistics import variance
 from xml.dom.minidom import Element
-import mingus.extra.LilyPond as LilyPond
+#import mingus.extra.LilyPond as LilyPond
 
 
 if __name__ is not None and "." in __name__:
@@ -36,13 +36,14 @@ def decode_key(key):
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
     letter = key[0]
     number = '4'        # C4 default 
+
     if len(key) > 1 :
         number = key[1]
     
-    x = i = 0
+    i = 0
     
-    while letters[i] != letter:
-        ++i
+    while i < len(letters) and letters[i] != letter:
+        i = i + 1
     
     return 8*int(number) + i
 
@@ -61,7 +62,8 @@ class EvalVisitor(jsBachVisitor):
 
         self.read_only        = True
 
-        self.sheet            = 
+        self.keys             = ["A", "B", "C", "D", "E", "F", "G"]
+        self.sheet            = []
 
     def visitRoot(self, ctx):
         #print("root")
@@ -90,11 +92,17 @@ class EvalVisitor(jsBachVisitor):
 
         print(self.variables)
         print(self.arrays)
+
+        print()
+        print("--------------Final State of music sheet--------------")
+        print()
+
+        print(self.sheet)
             
         print()
 
     def visitMethod_call(self, ctx):
-        #rint("visitMethod_call")
+        #print("visitMethod_call")
         l = list(ctx.getChildren())
         
         if l[0].getText() in self.methods:
@@ -193,7 +201,6 @@ class EvalVisitor(jsBachVisitor):
             self.variables[self.current_function] = self.local_variables
         
         else:
-            #print("visitFunction read")
             #returns fuction name
             parameters = []
 
@@ -215,12 +222,8 @@ class EvalVisitor(jsBachVisitor):
             self.visit(l[i])
             i += 1
 
-        #print("surt del while")
-        #return "INFO :: ended body"
-
     def visitExpr(self, ctx):
         #print("visitExpr")
-        
         l = list(ctx.getChildren())
         i = 0 # remains 0 if there is no brackets in the expression
         
@@ -331,7 +334,7 @@ class EvalVisitor(jsBachVisitor):
 
 
     def visitIf_block(self, ctx):
-        #prinT("ifBlock")
+        #print("ifBlock")
         l = list(ctx.getChildren())
         condition = self.visit(l[1])
 
@@ -370,15 +373,18 @@ class EvalVisitor(jsBachVisitor):
     def visitNumsNkeys(self, ctx):
         #print("visitNumsNKeys")
         l = list(ctx.getChildren())
+        element = l[0].getText()[0]
         
-        if l[0].getText() not in self.keys:
+        if element not in self.keys:
             self.array.append(int(l[0].getText()))
-            if len(l) > 1:
-                self.visit(l[1])
 
         else:
-            raise Exception("not implemented yet")
+            key = decode_key(l[0].getText())
+            self.array.append(key)
         
+        if len(l) > 1:
+            self.visit(l[1])
+
     def visitGetElem(self, ctx):
         #print("visitGetElement")
         l = list(ctx.getChildren())
@@ -458,13 +464,31 @@ class EvalVisitor(jsBachVisitor):
         #print(var)
         try:
             #self.local_variables[var].remove(x)
-            self.arrays[var].remove(X)
+            self.arrays[var].remove(x)
         
         except:
             raise Exception("Value not in array")
         
     def visitPlay(self, ctx):
+        #print("visitPlay")
         l = list(ctx.getChildren())
+        kt = []
+        if len(l) == 2:
+            key = decode_key(l[1].getText())
+            kt.append(key)
+
+        else:
+            self.visit(l[2])
+
+            kt = self.array
+            self.array = []
+
+        self.sheet = self.sheet + kt
+
+
+        
+
+
         
 
 

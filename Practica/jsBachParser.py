@@ -10,69 +10,70 @@ else:
 
 def serializedATN():
     return [
-        4,1,36,184,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,36,188,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,1,0,4,0,38,8,0,11,0,12,0,
         39,1,0,1,0,1,1,1,1,5,1,46,8,1,10,1,12,1,49,9,1,1,1,1,1,1,1,1,1,1,
-        2,1,2,1,2,1,2,1,2,1,2,1,2,5,2,62,8,2,10,2,12,2,65,9,2,1,3,1,3,5,
-        3,69,8,3,10,3,12,3,72,9,3,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,
-        4,1,4,3,4,85,8,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,3,4,94,8,4,1,4,1,4,
-        1,4,1,4,3,4,100,8,4,5,4,102,8,4,10,4,12,4,105,9,4,1,5,1,5,1,5,1,
-        5,1,6,1,6,1,6,1,7,1,7,1,7,4,7,117,8,7,11,7,12,7,118,1,8,1,8,1,8,
-        3,8,124,8,8,1,9,1,9,1,9,1,9,1,9,1,9,3,9,132,8,9,1,10,1,10,1,10,1,
-        10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,12,1,
-        12,3,12,151,8,12,1,13,1,13,5,13,155,8,13,10,13,12,13,158,9,13,1,
-        13,1,13,5,13,162,8,13,10,13,12,13,165,9,13,3,13,167,8,13,1,14,1,
-        14,1,14,1,15,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,17,1,17,1,
-        17,1,17,0,1,8,18,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,
-        0,4,1,0,20,21,1,0,28,33,1,0,25,26,1,0,23,24,194,0,37,1,0,0,0,2,43,
-        1,0,0,0,4,63,1,0,0,0,6,66,1,0,0,0,8,84,1,0,0,0,10,106,1,0,0,0,12,
-        110,1,0,0,0,14,113,1,0,0,0,16,120,1,0,0,0,18,125,1,0,0,0,20,133,
-        1,0,0,0,22,138,1,0,0,0,24,150,1,0,0,0,26,166,1,0,0,0,28,168,1,0,
-        0,0,30,171,1,0,0,0,32,176,1,0,0,0,34,180,1,0,0,0,36,38,3,2,1,0,37,
-        36,1,0,0,0,38,39,1,0,0,0,39,37,1,0,0,0,39,40,1,0,0,0,40,41,1,0,0,
-        0,41,42,5,0,0,1,42,1,1,0,0,0,43,47,5,22,0,0,44,46,5,21,0,0,45,44,
-        1,0,0,0,46,49,1,0,0,0,47,45,1,0,0,0,47,48,1,0,0,0,48,50,1,0,0,0,
-        49,47,1,0,0,0,50,51,5,1,0,0,51,52,3,4,2,0,52,53,5,2,0,0,53,3,1,0,
-        0,0,54,62,3,8,4,0,55,62,3,10,5,0,56,62,3,12,6,0,57,62,3,14,7,0,58,
-        62,3,18,9,0,59,62,3,22,11,0,60,62,3,6,3,0,61,54,1,0,0,0,61,55,1,
-        0,0,0,61,56,1,0,0,0,61,57,1,0,0,0,61,58,1,0,0,0,61,59,1,0,0,0,61,
-        60,1,0,0,0,62,65,1,0,0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,5,1,0,0,
-        0,65,63,1,0,0,0,66,70,5,22,0,0,67,69,3,8,4,0,68,67,1,0,0,0,69,72,
-        1,0,0,0,70,68,1,0,0,0,70,71,1,0,0,0,71,7,1,0,0,0,72,70,1,0,0,0,73,
-        74,6,4,-1,0,74,75,5,3,0,0,75,76,3,8,4,0,76,77,5,4,0,0,77,85,1,0,
-        0,0,78,85,7,0,0,0,79,85,3,24,12,0,80,85,3,30,15,0,81,85,3,28,14,
-        0,82,85,3,32,16,0,83,85,3,34,17,0,84,73,1,0,0,0,84,78,1,0,0,0,84,
-        79,1,0,0,0,84,80,1,0,0,0,84,81,1,0,0,0,84,82,1,0,0,0,84,83,1,0,0,
-        0,85,103,1,0,0,0,86,87,10,9,0,0,87,88,7,1,0,0,88,102,3,8,4,10,89,
-        90,10,8,0,0,90,93,7,2,0,0,91,94,3,8,4,0,92,94,5,21,0,0,93,91,1,0,
-        0,0,93,92,1,0,0,0,94,102,1,0,0,0,95,96,10,7,0,0,96,99,7,3,0,0,97,
-        100,3,8,4,0,98,100,5,21,0,0,99,97,1,0,0,0,99,98,1,0,0,0,100,102,
-        1,0,0,0,101,86,1,0,0,0,101,89,1,0,0,0,101,95,1,0,0,0,102,105,1,0,
-        0,0,103,101,1,0,0,0,103,104,1,0,0,0,104,9,1,0,0,0,105,103,1,0,0,
-        0,106,107,5,21,0,0,107,108,5,5,0,0,108,109,3,8,4,0,109,11,1,0,0,
-        0,110,111,5,6,0,0,111,112,5,21,0,0,112,13,1,0,0,0,113,116,5,7,0,
-        0,114,117,5,35,0,0,115,117,3,8,4,0,116,114,1,0,0,0,116,115,1,0,0,
-        0,117,118,1,0,0,0,118,116,1,0,0,0,118,119,1,0,0,0,119,15,1,0,0,0,
-        120,123,5,8,0,0,121,124,5,19,0,0,122,124,3,26,13,0,123,121,1,0,0,
-        0,123,122,1,0,0,0,124,17,1,0,0,0,125,126,5,9,0,0,126,127,3,8,4,0,
-        127,128,5,1,0,0,128,129,3,4,2,0,129,131,5,2,0,0,130,132,3,20,10,
-        0,131,130,1,0,0,0,131,132,1,0,0,0,132,19,1,0,0,0,133,134,5,10,0,
-        0,134,135,5,1,0,0,135,136,3,4,2,0,136,137,5,2,0,0,137,21,1,0,0,0,
-        138,139,5,11,0,0,139,140,3,8,4,0,140,141,5,1,0,0,141,142,3,4,2,0,
-        142,143,5,2,0,0,143,23,1,0,0,0,144,145,5,12,0,0,145,146,3,26,13,
-        0,146,147,5,13,0,0,147,151,1,0,0,0,148,149,5,12,0,0,149,151,5,13,
-        0,0,150,144,1,0,0,0,150,148,1,0,0,0,151,25,1,0,0,0,152,156,7,0,0,
-        0,153,155,3,26,13,0,154,153,1,0,0,0,155,158,1,0,0,0,156,154,1,0,
-        0,0,156,157,1,0,0,0,157,167,1,0,0,0,158,156,1,0,0,0,159,163,5,19,
-        0,0,160,162,3,26,13,0,161,160,1,0,0,0,162,165,1,0,0,0,163,161,1,
-        0,0,0,163,164,1,0,0,0,164,167,1,0,0,0,165,163,1,0,0,0,166,152,1,
-        0,0,0,166,159,1,0,0,0,167,27,1,0,0,0,168,169,5,14,0,0,169,170,5,
-        21,0,0,170,29,1,0,0,0,171,172,5,21,0,0,172,173,5,15,0,0,173,174,
-        3,8,4,0,174,175,5,16,0,0,175,31,1,0,0,0,176,177,5,21,0,0,177,178,
-        5,17,0,0,178,179,3,8,4,0,179,33,1,0,0,0,180,181,5,18,0,0,181,182,
-        3,30,15,0,182,35,1,0,0,0,18,39,47,61,63,70,84,93,99,101,103,116,
-        118,123,131,150,156,163,166
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,5,2,63,8,2,10,2,12,2,66,9,2,1,3,1,
+        3,5,3,70,8,3,10,3,12,3,73,9,3,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,
+        4,1,4,1,4,3,4,86,8,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,3,4,95,8,4,1,4,
+        1,4,1,4,1,4,3,4,101,8,4,5,4,103,8,4,10,4,12,4,106,9,4,1,5,1,5,1,
+        5,1,5,1,6,1,6,1,6,1,7,1,7,1,7,4,7,118,8,7,11,7,12,7,119,1,8,1,8,
+        1,8,1,8,1,8,1,8,3,8,128,8,8,1,9,1,9,1,9,1,9,1,9,1,9,3,9,136,8,9,
+        1,10,1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,1,12,1,12,
+        1,12,1,12,1,12,1,12,3,12,155,8,12,1,13,1,13,5,13,159,8,13,10,13,
+        12,13,162,9,13,1,13,1,13,5,13,166,8,13,10,13,12,13,169,9,13,3,13,
+        171,8,13,1,14,1,14,1,14,1,15,1,15,1,15,1,15,1,15,1,16,1,16,1,16,
+        1,16,1,17,1,17,1,17,1,17,0,1,8,18,0,2,4,6,8,10,12,14,16,18,20,22,
+        24,26,28,30,32,34,0,4,1,0,20,21,1,0,28,33,1,0,25,26,1,0,23,24,199,
+        0,37,1,0,0,0,2,43,1,0,0,0,4,64,1,0,0,0,6,67,1,0,0,0,8,85,1,0,0,0,
+        10,107,1,0,0,0,12,111,1,0,0,0,14,114,1,0,0,0,16,121,1,0,0,0,18,129,
+        1,0,0,0,20,137,1,0,0,0,22,142,1,0,0,0,24,154,1,0,0,0,26,170,1,0,
+        0,0,28,172,1,0,0,0,30,175,1,0,0,0,32,180,1,0,0,0,34,184,1,0,0,0,
+        36,38,3,2,1,0,37,36,1,0,0,0,38,39,1,0,0,0,39,37,1,0,0,0,39,40,1,
+        0,0,0,40,41,1,0,0,0,41,42,5,0,0,1,42,1,1,0,0,0,43,47,5,22,0,0,44,
+        46,5,21,0,0,45,44,1,0,0,0,46,49,1,0,0,0,47,45,1,0,0,0,47,48,1,0,
+        0,0,48,50,1,0,0,0,49,47,1,0,0,0,50,51,5,1,0,0,51,52,3,4,2,0,52,53,
+        5,2,0,0,53,3,1,0,0,0,54,63,3,8,4,0,55,63,3,10,5,0,56,63,3,12,6,0,
+        57,63,3,14,7,0,58,63,3,16,8,0,59,63,3,18,9,0,60,63,3,22,11,0,61,
+        63,3,6,3,0,62,54,1,0,0,0,62,55,1,0,0,0,62,56,1,0,0,0,62,57,1,0,0,
+        0,62,58,1,0,0,0,62,59,1,0,0,0,62,60,1,0,0,0,62,61,1,0,0,0,63,66,
+        1,0,0,0,64,62,1,0,0,0,64,65,1,0,0,0,65,5,1,0,0,0,66,64,1,0,0,0,67,
+        71,5,22,0,0,68,70,3,8,4,0,69,68,1,0,0,0,70,73,1,0,0,0,71,69,1,0,
+        0,0,71,72,1,0,0,0,72,7,1,0,0,0,73,71,1,0,0,0,74,75,6,4,-1,0,75,76,
+        5,3,0,0,76,77,3,8,4,0,77,78,5,4,0,0,78,86,1,0,0,0,79,86,7,0,0,0,
+        80,86,3,24,12,0,81,86,3,30,15,0,82,86,3,28,14,0,83,86,3,32,16,0,
+        84,86,3,34,17,0,85,74,1,0,0,0,85,79,1,0,0,0,85,80,1,0,0,0,85,81,
+        1,0,0,0,85,82,1,0,0,0,85,83,1,0,0,0,85,84,1,0,0,0,86,104,1,0,0,0,
+        87,88,10,9,0,0,88,89,7,1,0,0,89,103,3,8,4,10,90,91,10,8,0,0,91,94,
+        7,2,0,0,92,95,3,8,4,0,93,95,5,21,0,0,94,92,1,0,0,0,94,93,1,0,0,0,
+        95,103,1,0,0,0,96,97,10,7,0,0,97,100,7,3,0,0,98,101,3,8,4,0,99,101,
+        5,21,0,0,100,98,1,0,0,0,100,99,1,0,0,0,101,103,1,0,0,0,102,87,1,
+        0,0,0,102,90,1,0,0,0,102,96,1,0,0,0,103,106,1,0,0,0,104,102,1,0,
+        0,0,104,105,1,0,0,0,105,9,1,0,0,0,106,104,1,0,0,0,107,108,5,21,0,
+        0,108,109,5,5,0,0,109,110,3,8,4,0,110,11,1,0,0,0,111,112,5,6,0,0,
+        112,113,5,21,0,0,113,13,1,0,0,0,114,117,5,7,0,0,115,118,5,35,0,0,
+        116,118,3,8,4,0,117,115,1,0,0,0,117,116,1,0,0,0,118,119,1,0,0,0,
+        119,117,1,0,0,0,119,120,1,0,0,0,120,15,1,0,0,0,121,127,5,8,0,0,122,
+        128,5,19,0,0,123,124,5,9,0,0,124,125,3,26,13,0,125,126,5,10,0,0,
+        126,128,1,0,0,0,127,122,1,0,0,0,127,123,1,0,0,0,128,17,1,0,0,0,129,
+        130,5,11,0,0,130,131,3,8,4,0,131,132,5,1,0,0,132,133,3,4,2,0,133,
+        135,5,2,0,0,134,136,3,20,10,0,135,134,1,0,0,0,135,136,1,0,0,0,136,
+        19,1,0,0,0,137,138,5,12,0,0,138,139,5,1,0,0,139,140,3,4,2,0,140,
+        141,5,2,0,0,141,21,1,0,0,0,142,143,5,13,0,0,143,144,3,8,4,0,144,
+        145,5,1,0,0,145,146,3,4,2,0,146,147,5,2,0,0,147,23,1,0,0,0,148,149,
+        5,9,0,0,149,150,3,26,13,0,150,151,5,10,0,0,151,155,1,0,0,0,152,153,
+        5,9,0,0,153,155,5,10,0,0,154,148,1,0,0,0,154,152,1,0,0,0,155,25,
+        1,0,0,0,156,160,7,0,0,0,157,159,3,26,13,0,158,157,1,0,0,0,159,162,
+        1,0,0,0,160,158,1,0,0,0,160,161,1,0,0,0,161,171,1,0,0,0,162,160,
+        1,0,0,0,163,167,5,19,0,0,164,166,3,26,13,0,165,164,1,0,0,0,166,169,
+        1,0,0,0,167,165,1,0,0,0,167,168,1,0,0,0,168,171,1,0,0,0,169,167,
+        1,0,0,0,170,156,1,0,0,0,170,163,1,0,0,0,171,27,1,0,0,0,172,173,5,
+        14,0,0,173,174,5,21,0,0,174,29,1,0,0,0,175,176,5,21,0,0,176,177,
+        5,15,0,0,177,178,3,8,4,0,178,179,5,16,0,0,179,31,1,0,0,0,180,181,
+        5,21,0,0,181,182,5,17,0,0,182,183,3,8,4,0,183,33,1,0,0,0,184,185,
+        5,18,0,0,185,186,3,30,15,0,186,35,1,0,0,0,18,39,47,62,64,71,85,94,
+        100,102,104,117,119,127,135,154,160,167,170
     ]
 
 class jsBachParser ( Parser ):
@@ -86,11 +87,11 @@ class jsBachParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'|:'", "':|'", "'('", "')'", "'<-'", 
-                     "'<?>'", "'<!>'", "'<:>'", "'if'", "'else'", "'while'", 
-                     "'{'", "'}'", "'#'", "'['", "']'", "'<<'", "'8<'", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", "'/='", 
-                     "'<'", "'>'", "'<='", "'>='" ]
+                     "'<?>'", "'<!>'", "'<:>'", "'{'", "'}'", "'if'", "'else'", 
+                     "'while'", "'#'", "'['", "']'", "'<<'", "'8<'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "'+'", "'-'", 
+                     "'*'", "'/'", "'%'", "'=='", "'/='", "'<'", "'>'", 
+                     "'<='", "'>='" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -332,6 +333,13 @@ class jsBachParser ( Parser ):
                 return self.getTypedRuleContext(jsBachParser.WriteContext,i)
 
 
+        def play(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(jsBachParser.PlayContext)
+            else:
+                return self.getTypedRuleContext(jsBachParser.PlayContext,i)
+
+
         def if_block(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(jsBachParser.If_blockContext)
@@ -372,11 +380,11 @@ class jsBachParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 63
+            self.state = 64
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << jsBachParser.T__2) | (1 << jsBachParser.T__5) | (1 << jsBachParser.T__6) | (1 << jsBachParser.T__8) | (1 << jsBachParser.T__10) | (1 << jsBachParser.T__11) | (1 << jsBachParser.T__13) | (1 << jsBachParser.T__17) | (1 << jsBachParser.NUM) | (1 << jsBachParser.VAR) | (1 << jsBachParser.METHOD_NAME))) != 0):
-                self.state = 61
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << jsBachParser.T__2) | (1 << jsBachParser.T__5) | (1 << jsBachParser.T__6) | (1 << jsBachParser.T__7) | (1 << jsBachParser.T__8) | (1 << jsBachParser.T__10) | (1 << jsBachParser.T__12) | (1 << jsBachParser.T__13) | (1 << jsBachParser.T__17) | (1 << jsBachParser.NUM) | (1 << jsBachParser.VAR) | (1 << jsBachParser.METHOD_NAME))) != 0):
+                self.state = 62
                 self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
                 if la_ == 1:
@@ -401,21 +409,26 @@ class jsBachParser ( Parser ):
 
                 elif la_ == 5:
                     self.state = 58
-                    self.if_block()
+                    self.play()
                     pass
 
                 elif la_ == 6:
                     self.state = 59
-                    self.while_block()
+                    self.if_block()
                     pass
 
                 elif la_ == 7:
                     self.state = 60
+                    self.while_block()
+                    pass
+
+                elif la_ == 8:
+                    self.state = 61
                     self.method_call()
                     pass
 
 
-                self.state = 65
+                self.state = 66
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -463,16 +476,16 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_method_call)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 66
+            self.state = 67
             self.match(jsBachParser.METHOD_NAME)
-            self.state = 70
+            self.state = 71
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 67
+                    self.state = 68
                     self.expr(0) 
-                self.state = 72
+                self.state = 73
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
 
@@ -576,20 +589,20 @@ class jsBachParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 84
+            self.state = 85
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
-                self.state = 74
-                self.match(jsBachParser.T__2)
                 self.state = 75
-                self.expr(0)
+                self.match(jsBachParser.T__2)
                 self.state = 76
+                self.expr(0)
+                self.state = 77
                 self.match(jsBachParser.T__3)
                 pass
 
             elif la_ == 2:
-                self.state = 78
+                self.state = 79
                 _la = self._input.LA(1)
                 if not(_la==jsBachParser.NUM or _la==jsBachParser.VAR):
                     self._errHandler.recoverInline(self)
@@ -599,33 +612,33 @@ class jsBachParser ( Parser ):
                 pass
 
             elif la_ == 3:
-                self.state = 79
+                self.state = 80
                 self.array()
                 pass
 
             elif la_ == 4:
-                self.state = 80
+                self.state = 81
                 self.getElem()
                 pass
 
             elif la_ == 5:
-                self.state = 81
+                self.state = 82
                 self.getLength()
                 pass
 
             elif la_ == 6:
-                self.state = 82
+                self.state = 83
                 self.addElem()
                 pass
 
             elif la_ == 7:
-                self.state = 83
+                self.state = 84
                 self.rmElem()
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 103
+            self.state = 104
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -633,51 +646,51 @@ class jsBachParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 101
+                    self.state = 102
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
                     if la_ == 1:
                         localctx = jsBachParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 86
+                        self.state = 87
                         if not self.precpred(self._ctx, 9):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
-                        self.state = 87
+                        self.state = 88
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << jsBachParser.EQ) | (1 << jsBachParser.NEQ) | (1 << jsBachParser.LT) | (1 << jsBachParser.GT) | (1 << jsBachParser.LEQ) | (1 << jsBachParser.GEQ))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 88
+                        self.state = 89
                         self.expr(10)
                         pass
 
                     elif la_ == 2:
                         localctx = jsBachParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 89
+                        self.state = 90
                         if not self.precpred(self._ctx, 8):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
-                        self.state = 90
+                        self.state = 91
                         _la = self._input.LA(1)
                         if not(_la==jsBachParser.MUL or _la==jsBachParser.DIV):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 93
+                        self.state = 94
                         self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
                         if la_ == 1:
-                            self.state = 91
+                            self.state = 92
                             self.expr(0)
                             pass
 
                         elif la_ == 2:
-                            self.state = 92
+                            self.state = 93
                             self.match(jsBachParser.VAR)
                             pass
 
@@ -687,27 +700,27 @@ class jsBachParser ( Parser ):
                     elif la_ == 3:
                         localctx = jsBachParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 95
+                        self.state = 96
                         if not self.precpred(self._ctx, 7):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
-                        self.state = 96
+                        self.state = 97
                         _la = self._input.LA(1)
                         if not(_la==jsBachParser.MES or _la==jsBachParser.MENYS):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 99
+                        self.state = 100
                         self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
                         if la_ == 1:
-                            self.state = 97
+                            self.state = 98
                             self.expr(0)
                             pass
 
                         elif la_ == 2:
-                            self.state = 98
+                            self.state = 99
                             self.match(jsBachParser.VAR)
                             pass
 
@@ -715,7 +728,7 @@ class jsBachParser ( Parser ):
                         pass
 
              
-                self.state = 105
+                self.state = 106
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
 
@@ -760,11 +773,11 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 10, self.RULE_assig)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 106
-            self.match(jsBachParser.VAR)
             self.state = 107
-            self.match(jsBachParser.T__4)
+            self.match(jsBachParser.VAR)
             self.state = 108
+            self.match(jsBachParser.T__4)
+            self.state = 109
             self.expr(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -803,9 +816,9 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_read)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 110
-            self.match(jsBachParser.T__5)
             self.state = 111
+            self.match(jsBachParser.T__5)
+            self.state = 112
             self.match(jsBachParser.VAR)
         except RecognitionException as re:
             localctx.exception = re
@@ -854,22 +867,22 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_write)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 113
+            self.state = 114
             self.match(jsBachParser.T__6)
-            self.state = 116 
+            self.state = 117 
             self._errHandler.sync(self)
             _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
-                    self.state = 116
+                    self.state = 117
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [jsBachParser.STR]:
-                        self.state = 114
+                        self.state = 115
                         self.match(jsBachParser.STR)
                         pass
-                    elif token in [jsBachParser.T__2, jsBachParser.T__11, jsBachParser.T__13, jsBachParser.T__17, jsBachParser.NUM, jsBachParser.VAR]:
-                        self.state = 115
+                    elif token in [jsBachParser.T__2, jsBachParser.T__8, jsBachParser.T__13, jsBachParser.T__17, jsBachParser.NUM, jsBachParser.VAR]:
+                        self.state = 116
                         self.expr(0)
                         pass
                     else:
@@ -878,7 +891,7 @@ class jsBachParser ( Parser ):
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 118 
+                self.state = 119 
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
 
@@ -923,21 +936,25 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_play)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 120
+            self.state = 121
             self.match(jsBachParser.T__7)
-            self.state = 123
+            self.state = 127
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
-            if la_ == 1:
-                self.state = 121
+            token = self._input.LA(1)
+            if token in [jsBachParser.KEY]:
+                self.state = 122
                 self.match(jsBachParser.KEY)
                 pass
-
-            elif la_ == 2:
-                self.state = 122
+            elif token in [jsBachParser.T__8]:
+                self.state = 123
+                self.match(jsBachParser.T__8)
+                self.state = 124
                 self.numsNkeys()
+                self.state = 125
+                self.match(jsBachParser.T__9)
                 pass
-
+            else:
+                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -986,21 +1003,21 @@ class jsBachParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 125
-            self.match(jsBachParser.T__8)
-            self.state = 126
-            self.expr(0)
-            self.state = 127
-            self.match(jsBachParser.T__0)
-            self.state = 128
-            self.body()
             self.state = 129
-            self.match(jsBachParser.T__1)
+            self.match(jsBachParser.T__10)
+            self.state = 130
+            self.expr(0)
             self.state = 131
+            self.match(jsBachParser.T__0)
+            self.state = 132
+            self.body()
+            self.state = 133
+            self.match(jsBachParser.T__1)
+            self.state = 135
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==jsBachParser.T__9:
-                self.state = 130
+            if _la==jsBachParser.T__11:
+                self.state = 134
                 self.else_block()
 
 
@@ -1042,13 +1059,13 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 20, self.RULE_else_block)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 133
-            self.match(jsBachParser.T__9)
-            self.state = 134
+            self.state = 137
+            self.match(jsBachParser.T__11)
+            self.state = 138
             self.match(jsBachParser.T__0)
-            self.state = 135
+            self.state = 139
             self.body()
-            self.state = 136
+            self.state = 140
             self.match(jsBachParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1092,15 +1109,15 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_while_block)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 138
-            self.match(jsBachParser.T__10)
-            self.state = 139
-            self.expr(0)
-            self.state = 140
-            self.match(jsBachParser.T__0)
-            self.state = 141
-            self.body()
             self.state = 142
+            self.match(jsBachParser.T__12)
+            self.state = 143
+            self.expr(0)
+            self.state = 144
+            self.match(jsBachParser.T__0)
+            self.state = 145
+            self.body()
+            self.state = 146
             self.match(jsBachParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1139,25 +1156,25 @@ class jsBachParser ( Parser ):
         localctx = jsBachParser.ArrayContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_array)
         try:
-            self.state = 150
+            self.state = 154
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 144
-                self.match(jsBachParser.T__11)
-                self.state = 145
+                self.state = 148
+                self.match(jsBachParser.T__8)
+                self.state = 149
                 self.numsNkeys()
-                self.state = 146
-                self.match(jsBachParser.T__12)
+                self.state = 150
+                self.match(jsBachParser.T__9)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 148
-                self.match(jsBachParser.T__11)
-                self.state = 149
-                self.match(jsBachParser.T__12)
+                self.state = 152
+                self.match(jsBachParser.T__8)
+                self.state = 153
+                self.match(jsBachParser.T__9)
                 pass
 
 
@@ -1211,42 +1228,42 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 26, self.RULE_numsNkeys)
         self._la = 0 # Token type
         try:
-            self.state = 166
+            self.state = 170
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [jsBachParser.NUM, jsBachParser.VAR]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 152
+                self.state = 156
                 _la = self._input.LA(1)
                 if not(_la==jsBachParser.NUM or _la==jsBachParser.VAR):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 156
+                self.state = 160
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt==1:
-                        self.state = 153
+                        self.state = 157
                         self.numsNkeys() 
-                    self.state = 158
+                    self.state = 162
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
 
                 pass
             elif token in [jsBachParser.KEY]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 159
-                self.match(jsBachParser.KEY)
                 self.state = 163
+                self.match(jsBachParser.KEY)
+                self.state = 167
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt==1:
-                        self.state = 160
+                        self.state = 164
                         self.numsNkeys() 
-                    self.state = 165
+                    self.state = 169
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
 
@@ -1291,9 +1308,9 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_getLength)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 168
+            self.state = 172
             self.match(jsBachParser.T__13)
-            self.state = 169
+            self.state = 173
             self.match(jsBachParser.VAR)
         except RecognitionException as re:
             localctx.exception = re
@@ -1336,13 +1353,13 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_getElem)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 171
+            self.state = 175
             self.match(jsBachParser.VAR)
-            self.state = 172
+            self.state = 176
             self.match(jsBachParser.T__14)
-            self.state = 173
+            self.state = 177
             self.expr(0)
-            self.state = 174
+            self.state = 178
             self.match(jsBachParser.T__15)
         except RecognitionException as re:
             localctx.exception = re
@@ -1385,11 +1402,11 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 32, self.RULE_addElem)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 176
+            self.state = 180
             self.match(jsBachParser.VAR)
-            self.state = 177
+            self.state = 181
             self.match(jsBachParser.T__16)
-            self.state = 178
+            self.state = 182
             self.expr(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -1429,9 +1446,9 @@ class jsBachParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_rmElem)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 180
+            self.state = 184
             self.match(jsBachParser.T__17)
-            self.state = 181
+            self.state = 185
             self.getElem()
         except RecognitionException as re:
             localctx.exception = re
