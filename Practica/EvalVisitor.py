@@ -56,7 +56,6 @@ class EvalVisitor(jsBachVisitor):
         self.methods            = {}
         self.parameters         = parameters
         self.arrays             = {}
-        self.array_accesses     = []
 
         self.current_function = start_function
         self.array            = []
@@ -66,7 +65,7 @@ class EvalVisitor(jsBachVisitor):
 
         self.keys             = ["A", "B", "C", "D", "E", "F", "G"]
         self.sheet            = []
-        self,memory_sim       = {}
+        self.memory_sim       = {}
         self.first_av_address = 0
 
     def visitRoot(self, ctx):
@@ -96,6 +95,7 @@ class EvalVisitor(jsBachVisitor):
 
         print(self.variables)
         print(self.arrays)
+        print(self.memory_sim)
 
         print()
         print("--------------Final State of music sheet--------------")
@@ -106,13 +106,15 @@ class EvalVisitor(jsBachVisitor):
         print()
 
     def visitMethod_call(self, ctx):
-        #print("visitMethod_call")
+        print("visitMethod_call")
         l = list(ctx.getChildren())
-        
+
         if l[0].getText() in self.methods:
             #print("method exists")
             previous_function = self.current_function
-            previous_array_accesses = self.array_accesses
+            pointers_to_remove = []
+            parameter_names = self.methods[l[0].getText()][1]
+            parameters_length = len(l) - 1
 
             function_tag = l[0].getText() + "-" + str(len(self.function_stack))
             #print("method exists")
@@ -127,28 +129,25 @@ class EvalVisitor(jsBachVisitor):
             
             # add parameters to local variables
             if len(l) > 1:
-                parameter_names = self.methods[l[0].getText()][1]
-                parameters_length = 1 - len(l)
-                array_accesses = {}
-                
+
                 if parameters_length == len(parameter_names):
                     for i in range(1, len(l)):
                         value = self.visit(l[i])
                             
                         if isinstance(value, int):
-                            new_local_variables[parameter_names[i]] = value
+                            new_local_variables[parameter_names[i-1]] = value
 
                         elif isinstance(value, list):
+                            #get the array's memory address
+                            adr = self.memory_sim[l[i].getText()]
 
-                            #change the name that references that array
-                            self.array = self.arrays.pop(l[i].getText())
-                            self.arrays[parameter_names[i]] = self.array
-                            self.array.clear()
+                            #set the memory address access for the parameter in the new function
+                            self.memory_sim[parameter_names[i-1]] = adr
+                            #array_accesses.append(l[i].getText())
 
-                            new_local_variables[parameter_names[i]] = l[i].getText()
-                            array_accesses.appent(l[i].getText())
+                            #add it to the list of pointers to remove after returning from the function
+                            pointers_to_remove.append(parameter_names[i-1])
                     
-                    self.array_accesses = array_accesses
                     self.local_variables = new_local_variables
                 
                 else:
@@ -174,9 +173,12 @@ class EvalVisitor(jsBachVisitor):
             
             self.local_variables = old_local_variables
             
+            #remove array references
+            for i in pointers_to_remove:
+                self.memory_sim.pop(i)
+            
             #change current function
             self.current_function = previous_function
-            self.array_accesses = previous_array_accesses
             self.function_stack.pop()
 
         else:
@@ -184,14 +186,16 @@ class EvalVisitor(jsBachVisitor):
 
 
     def visitFunction(self, ctx):
-        #print("visitFunction")
+        print("visitFunction")
         l = list(ctx.getChildren())
         
         if not self.read_only:
+            print(self.current_function)
+            print(self.memory_sim)
             #print("visitFunction no-read")
             #print(len(l))
             if len(l) > 4:
-                #print("function with params")
+                print("function with params")
                 i = 1
                 while l[i].getText() != '|:':
                     i += 1
@@ -243,16 +247,16 @@ class EvalVisitor(jsBachVisitor):
                 return int(txt)
             
             #variable
-            elif txt in self.local_variables and not isinstance(self.local_variables[txt], str):
+            elif txt in self.local_variables:
                 #print("variable " + txt)
                 ##print("value" + str(self.local_variables[txt]))
                 return self.local_variables[txt]
             
             #management for arrays stored in variables
-            elif txt in self.array_accesses:
+            elif txt in self.memory_sim:
                 #print("array variable  " + txt)
-                original_name = self.array_accesses[txt]
-                return self.arrays[original_name]
+                adr = self.memory_sim[txt]
+                return self.arrays[adr]
             
             # elif for array management 
             elif txt[0] == '{':
@@ -299,7 +303,7 @@ class EvalVisitor(jsBachVisitor):
                     return 0
 
     def visitAssig(self, ctx):
-        #print("visitAssig")
+        print("visitAssig")
         l = list(ctx.getChildren())
         
         value = self.visit(l[2])
@@ -310,10 +314,12 @@ class EvalVisitor(jsBachVisitor):
     
         elif isinstance(value, list):
             #print("assign array variable")
-            self.arrays[l[0].getText()] = value
-            self.array_accesses.append(l[0].getText())
+            #self.arrays[l[0].getText()] = value
 
-            
+            #find adress to this array
+            adr = self.memory_sim[l[2].getText()]
+            #add reference to array for the new variable
+            self.memory_sim[l[0].getText()] = adr
 
         elif l[2].getText() in self.keys:
             #print("single key in assig")
@@ -321,10 +327,13 @@ class EvalVisitor(jsBachVisitor):
 
         else:
             #print("direct array")
-            self.arrays[l[0].getText()] = self.array
-            self.array = []
-            self.array_accesses.append(l[0].getText())
-        
+            #self.arrays[self.first_av_address] = self.array
+            #self.array = []
+            self.arrays[self.first_av_address] = self.array.copy()
+            self.memory_sim[l[0].getText()] = self.first_av_address
+            self.first_av_address = self.first_av_address + 1
+            self.array.clear()
+
 
     def visitRead(self, ctx):
         #print("visitRead")
@@ -396,9 +405,11 @@ class EvalVisitor(jsBachVisitor):
         element = l[0].getText()[0]
         
         if element not in self.keys:
+            #print("element not in self.keys (regular numbers)")
             self.array.append(int(l[0].getText()))
 
         else:
+            #print("element is a key")
             key = decode_key(l[0].getText())
             self.array.append(key)
         
@@ -406,16 +417,17 @@ class EvalVisitor(jsBachVisitor):
             self.visit(l[1])
 
     def visitGetElem(self, ctx):
-        #print("visitGetElement")
+        print("visitGetElement")
         l = list(ctx.getChildren())
         var = l[0].getText()
-        
-        
-        if var in self.arrays:  #self.local_variables and isinstance(self.local_variables[var], list): 
-            pos = 0           
-            array = self.arrays[var]
+        print(var)
+        print(self.memory_sim)
+        if var in self.memory_sim:  #self.local_variables and isinstance(self.local_variables[var], list): 
+            print("var in memory")
+            pos = 0
+            adr = self.memory_sim[var]           
+            array = self.arrays[adr]
 
-            print(l[2].getText())
             if l[2].getText() in self.local_variables:
                 pos = pos + int(self.visit(l[2]))
             
@@ -423,10 +435,8 @@ class EvalVisitor(jsBachVisitor):
                 pos = pos + int(l[2].getText())
             
             else:
-                print("entra else")
                 try:
                     sv = self.visit(l[2])
-                    print(sv)
                     pos = pos + sv
 
                 except: 
@@ -436,7 +446,6 @@ class EvalVisitor(jsBachVisitor):
                 return array[pos]
             
             else:
-                print(pos)
                 raise Exception("Index out of bounds")
         
         else:
@@ -448,9 +457,9 @@ class EvalVisitor(jsBachVisitor):
         var = l[1].getText()
         #print("var " + var)
         #print(self.local_variables[var])
-        
-        if var in self.array_accesses: #self.local_variables and isinstance(self.local_variables[var], list):
-            return len(self.arrays[var])#len(self.local_variables[var])
+        if var in self.memory_sim: #self.local_variables and isinstance(self.local_variables[var], list):
+            adr = self.memory_sim[var]
+            return len(self.arrays[adr])#len(self.local_variables[var])
         
         else:
             raise Exception("Array not found") 
@@ -460,26 +469,25 @@ class EvalVisitor(jsBachVisitor):
         l = list(ctx.getChildren())
         var = l[0].getText()
         
-        if var in self.arrays: #self.local_variables and isinstance(self.local_variables[var], list):
+        if var in self.memory_sim: #self.local_variables and isinstance(self.local_variables[var], list):
             x = self.visit(l[2])
-            
+            adr = self.memory_sim(var)
             #print("print value that has to be concatenated: ")
             #print(x)
 
             if isinstance(x, int):
                 #self.local_variables[var].append(x)
-                self.arrays[var].append(x)
+                self.arrays[adr].append(x)
             
             elif isinstance(x, list):  
                 #self.local_variables[var] += x
-                self.arrays[var] += x
+                self.arrays[adr] += x
             
             elif self.array:
                 #self.local_variables[var] += self.array
-                self.arrays[var] += self.array
+                self.arrays[adr] += self.array
                 self.array = []
             
-        
         else:
             raise Exception("Variable not found or variable is not array")
     
@@ -488,45 +496,37 @@ class EvalVisitor(jsBachVisitor):
         l = list(ctx.getChildren())
         x = self.visit(l[1])
         var = l[1].getText().partition('[')[0]
-       
-        try:
-            self.arrays[var].remove(x)
-        
-        except:
-            raise Exception("Value not in array")
-        
+
+        if var in self.memory_sim:
+            adr = self.memory_sim(var)
+            try:
+                self.arrays[adr].remove(x)
+            
+            except:
+                raise Exception("Value not in array")
+        else:
+            raise Exception("Array not found")
+
+
     def visitPlay(self, ctx):
         #print("visitPlay")
         l = list(ctx.getChildren())
-        kt = []
+
         if len(l) == 2:
             if l[1].getText() in self.local_variables:
-                kt.append(self.local_variables[l[1].getText()])
+                self.sheet.append(self.local_variables[l[1].getText()])
 
-            elif l[1].getText() in self.array_accesses:
-                kt.append(self.arrays[l[1].getText()])
+            elif l[1].getText() in self.memory_sim:
+                adr = self.memory_sim(l[1].getText())
+                self.sheet.append(self.arrays[adr])
 
             else:
                 key = decode_key(l[1].getText())
-                kt.append(key)
+                self.sheet.append(key)
 
         else:
             self.visit(l[2])
 
-            kt = self.array
-            self.array = []
-
-        self.sheet = self.sheet + kt
-
-
-    
-
-
-
-#TODO: pass by reference does not work when the parameter and the variable name do not match
-
-    
-
-
-
-        
+            self.sheet = self.sheet + self.array
+            self.array.clear()
+  
