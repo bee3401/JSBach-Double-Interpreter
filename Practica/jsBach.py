@@ -1,4 +1,5 @@
 import sys
+import os
 from antlr4 import *
 from jsBachLexer import jsBachLexer
 from jsBachParser import jsBachParser
@@ -28,6 +29,7 @@ if len(sys.argv) > 2:
 
 visitor = EvalVisitor(startFunc, params)
 visitor.visit(tree)
+
 #tree = parser.root() 
 #visitor = TreeVisitor()
 #visitor.visit(tree)

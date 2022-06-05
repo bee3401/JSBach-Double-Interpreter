@@ -9,13 +9,10 @@ Hanoi |:
 
 HanoiRec n src dst aux |:
     if n > 0 |:
-        <!> "File: " n
         HanoiRec (n - 1) src aux dst
         note <- src[#src]
-        <!> "bkpt1"
         8< src[#src]
         dst << note
-        <!> "Here"
         <:> note
         HanoiRec (n - 1) aux dst src
     :|

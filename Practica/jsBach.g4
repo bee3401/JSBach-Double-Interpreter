@@ -21,7 +21,7 @@ expr :  '(' expr ')'
     |   expr  (EQ | NEQ | LT | GT | LEQ | GEQ) expr                       
     |   expr  (MUL | DIV) (expr | VAR)      
     |   expr (MES | MENYS) (expr | VAR)     
-    |   (NUM | VAR)
+    |   (NUM | VAR | KEY)
     |   array
     |   getElem
     |   getLength
@@ -29,15 +29,15 @@ expr :  '(' expr ')'
     |   rmElem
     ;
 
-assig: VAR '<-' (expr|KEY);
+assig: VAR '<-' (expr);
 
 read      : '<?>'  VAR                          ;
 write     : '<!>'  (STR | expr)+                ;
 play      : '<:>'  (KEY | '{' numsNkeys '}'| VAR)    ;
 
-if_block: 'if' expr  '|:' body ':|' else_block?;
+if_block: 'if' (expr|KEY)  '|:' body ':|' else_block?;
 else_block: 'else' '|:' body ':|';
-while_block:'while' expr '|:' body ':|';
+while_block: 'while' (expr) '|:' body ':|';
 
 array : '{' numsNkeys '}' | '{' '}'          ;
 numsNkeys:   (NUM | VAR) numsNkeys*           
