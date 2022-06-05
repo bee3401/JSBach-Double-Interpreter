@@ -7,7 +7,9 @@ from EvalVisitor import EvalVisitor
 
 file = open(sys.argv[1])
 input_stream = InputStream(file.read())
-startFunc = 'main'
+
+startFunc = "Main"
+
 params = []
 
 print(input_stream)
@@ -18,7 +20,7 @@ parser = jsBachParser(token_stream)
 tree = parser.root()
 
 if len(sys.argv) > 2:
-    startFunc = sys.argv[1]
+    startFunc = sys.argv[2]
     i = 2
     while i < len(sys.argv):
         params.append(sys.argv[i])

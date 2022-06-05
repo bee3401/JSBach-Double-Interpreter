@@ -29,11 +29,11 @@ expr :  '(' expr ')'
     |   rmElem
     ;
 
-assig: VAR '<-' expr;
+assig: VAR '<-' (expr|KEY);
 
 read      : '<?>'  VAR                          ;
 write     : '<!>'  (STR | expr)+                ;
-play      : '<:>'  (KEY | '{' numsNkeys '}')    ;
+play      : '<:>'  (KEY | '{' numsNkeys '}'| VAR)    ;
 
 if_block: 'if' expr  '|:' body ':|' else_block?;
 else_block: 'else' '|:' body ':|';
@@ -60,7 +60,7 @@ MUL     : '*' ;
 DIV     : '/' ;
 MOD     : '%' ;
 
-EQ      : '==';
+EQ      : '=';
 NEQ     : '/=';
 LT      : '<' ;
 GT      : '>' ;

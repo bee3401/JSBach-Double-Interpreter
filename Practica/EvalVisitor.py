@@ -1,4 +1,5 @@
 from array import array
+from re import X
 from statistics import variance
 from xml.dom.minidom import Element
 #import mingus.extra.LilyPond as LilyPond
@@ -21,7 +22,7 @@ numeric_op_dictionary = {
 }
 
 logical_op_dictionary = {
-    '==': lambda x, y: x == y,
+    '=': lambda x, y: x == y,
     '/=': lambda x, y: x != y,
     '<':  lambda x, y: x < y,
     '>':  lambda x, y: x > y,
@@ -47,6 +48,7 @@ def decode_key(key):
     
     return 8*int(number) + i
 
+
 class EvalVisitor(jsBachVisitor):
     def __init__(self, start_function, parameters):
         self.variables          = {}
@@ -64,6 +66,8 @@ class EvalVisitor(jsBachVisitor):
 
         self.keys             = ["A", "B", "C", "D", "E", "F", "G"]
         self.sheet            = []
+        self,memory_sim       = {}
+        self.first_av_address = 0
 
     def visitRoot(self, ctx):
         #print("root")
@@ -77,13 +81,13 @@ class EvalVisitor(jsBachVisitor):
             self.methods[function_info[0]] = (l[i], function_info[1])
             i += 1
         
-        self.function_stack.append("Main")
+        self.function_stack.append(self.current_function)
         self.read_only = False
         
         print("------------------------Output------------------------")
         print()
 
-        self.visit(self.methods["Main"][0])
+        self.visit(self.methods[self.current_function][0])
         
 
         print()
@@ -123,31 +127,32 @@ class EvalVisitor(jsBachVisitor):
             
             # add parameters to local variables
             if len(l) > 1:
-                parameter_values = []
-                array_accesses = []
-                for p in range(1, len(l)):
-                    value = self.visit(l[p])
-                    
-                    if isinstance(value, int):
-                        parameter_values.append(value)
-                    
-                    elif isinstance(value, list):
-                        parameter_values.append(l[p].getText())
-                        array_accesses.append(l[p].getText())
-                    
-                if len(parameter_values) == len(self.methods[l[0].getText()][1]):
-                    parameter_names = self.methods[l[0].getText()][1]
-                    
-                    for i in range(0, len(parameter_values)):
-                        new_local_variables[parameter_names[i]] = parameter_values[i]
+                parameter_names = self.methods[l[0].getText()][1]
+                parameters_length = 1 - len(l)
+                array_accesses = {}
+                
+                if parameters_length == len(parameter_names):
+                    for i in range(1, len(l)):
+                        value = self.visit(l[i])
+                            
+                        if isinstance(value, int):
+                            new_local_variables[parameter_names[i]] = value
+
+                        elif isinstance(value, list):
+
+                            #change the name that references that array
+                            self.array = self.arrays.pop(l[i].getText())
+                            self.arrays[parameter_names[i]] = self.array
+                            self.array.clear()
+
+                            new_local_variables[parameter_names[i]] = l[i].getText()
+                            array_accesses.appent(l[i].getText())
                     
                     self.array_accesses = array_accesses
+                    self.local_variables = new_local_variables
                 
                 else:
                     raise Exception("Unexpected number of parameters for this function")
-
-                self.local_variables = new_local_variables
-
             
             #change current function
             self.current_function = function_tag
@@ -203,12 +208,11 @@ class EvalVisitor(jsBachVisitor):
         else:
             #returns fuction name
             parameters = []
+            i = 1
 
-            if len(l) > 4:
-                i = 1
-                while l[i].getText() != '|:':
-                    parameters.append(l[i].getText())
-                    i += 1
+            while l[i].getText() != '|:':
+                parameters.append(l[i].getText())
+                i += 1
             
             function_info = (l[0].getText(), parameters)
             return function_info
@@ -227,8 +231,11 @@ class EvalVisitor(jsBachVisitor):
         l = list(ctx.getChildren())
         i = 0 # remains 0 if there is no brackets in the expression
         
+        #print(l[0].getText())
+
         if len(l) == 1:
             txt = l[0].getText()
+            #print("len 1")
             
             #numeric value 
             if txt.isnumeric():
@@ -242,9 +249,10 @@ class EvalVisitor(jsBachVisitor):
                 return self.local_variables[txt]
             
             #management for arrays stored in variables
-            elif txt in self.array_accesses and txt in self.arrays:
+            elif txt in self.array_accesses:
                 #print("array variable  " + txt)
-                return self.arrays[txt]
+                original_name = self.array_accesses[txt]
+                return self.arrays[original_name]
             
             # elif for array management 
             elif txt[0] == '{':
@@ -252,7 +260,12 @@ class EvalVisitor(jsBachVisitor):
                 return self.visit(l[0])
             
             else:
-                raise Exception("Invalid element or unaccessible array")
+                try:
+                    return self.visit(l[0])
+
+                except:
+                    print(l[0].getText())
+                    raise Exception("Invalid element or unaccessible array")
                 
         else:
             if l[0].getText() == '(':
@@ -299,6 +312,13 @@ class EvalVisitor(jsBachVisitor):
             #print("assign array variable")
             self.arrays[l[0].getText()] = value
             self.array_accesses.append(l[0].getText())
+
+            
+
+        elif l[2].getText() in self.keys:
+            #print("single key in assig")
+            self.local_variables[l[0].getText()] = decode_key(l[2].getText())
+
         else:
             #print("direct array")
             self.arrays[l[0].getText()] = self.array
@@ -388,25 +408,35 @@ class EvalVisitor(jsBachVisitor):
     def visitGetElem(self, ctx):
         #print("visitGetElement")
         l = list(ctx.getChildren())
-
         var = l[0].getText()
         
-        if var in self.arrays:  #self.local_variables and isinstance(self.local_variables[var], list):            
+        
+        if var in self.arrays:  #self.local_variables and isinstance(self.local_variables[var], list): 
+            pos = 0           
             array = self.arrays[var]
-            
+
+            print(l[2].getText())
             if l[2].getText() in self.local_variables:
-                i = int(self.visit(l[2]))
+                pos = pos + int(self.visit(l[2]))
             
             elif l[2].getText().isnumeric():
-                i = int(l[2].getText())
+                pos = pos + int(l[2].getText())
             
             else:
-                raise Exception("Invalid index for array")
+                print("entra else")
+                try:
+                    sv = self.visit(l[2])
+                    print(sv)
+                    pos = pos + sv
+
+                except: 
+                    raise Exception("Invalid index for array")
             
-            if i in range(0, len(array)):
-                return array[i]
+            if pos in range(0, len(array)):
+                return array[pos]
             
             else:
+                print(pos)
                 raise Exception("Index out of bounds")
         
         else:
@@ -415,14 +445,11 @@ class EvalVisitor(jsBachVisitor):
     def visitGetLength(self, ctx):
         #print("getLength")
         l = list(ctx.getChildren())
-        
         var = l[1].getText()
         #print("var " + var)
         #print(self.local_variables[var])
         
-        if var in self.arrays: #self.local_variables and isinstance(self.local_variables[var], list):
-            #print("entra if")
-            #print(len(self.local_variables[var]))
+        if var in self.array_accesses: #self.local_variables and isinstance(self.local_variables[var], list):
             return len(self.arrays[var])#len(self.local_variables[var])
         
         else:
@@ -460,10 +487,9 @@ class EvalVisitor(jsBachVisitor):
         #print("RmElem")
         l = list(ctx.getChildren())
         x = self.visit(l[1])
-        var = l[1].getText()[0]
-        #print(var)
+        var = l[1].getText().partition('[')[0]
+       
         try:
-            #self.local_variables[var].remove(x)
             self.arrays[var].remove(x)
         
         except:
@@ -474,8 +500,15 @@ class EvalVisitor(jsBachVisitor):
         l = list(ctx.getChildren())
         kt = []
         if len(l) == 2:
-            key = decode_key(l[1].getText())
-            kt.append(key)
+            if l[1].getText() in self.local_variables:
+                kt.append(self.local_variables[l[1].getText()])
+
+            elif l[1].getText() in self.array_accesses:
+                kt.append(self.arrays[l[1].getText()])
+
+            else:
+                key = decode_key(l[1].getText())
+                kt.append(key)
 
         else:
             self.visit(l[2])
@@ -486,13 +519,11 @@ class EvalVisitor(jsBachVisitor):
         self.sheet = self.sheet + kt
 
 
-        
-
-
-        
+    
 
 
 
+#TODO: pass by reference does not work when the parameter and the variable name do not match
 
     
 
