@@ -22,7 +22,7 @@ tree = parser.root()
 
 if len(sys.argv) > 2:
     startFunc = sys.argv[2]
-    i = 2
+    i = 3
     while i < len(sys.argv):
         params.append(sys.argv[i])
         i += 1

@@ -1,19 +1,18 @@
-~~~ Notes de Hanoi ~~~
+~~~ programa que llegeix dos enters i n'escriu el seu maxim comu divisor ~~~
 
-Hanoi |:
-    src <- {C D E F G}
-    dst <- {}
-    aux <- {}
-    HanoiRec #src src dst aux
+Main a b |:
+    <!> "Calculant el mcd de " a b "..."
+    Euclides a b
 :|
 
-HanoiRec n src dst aux |:
-    if n > 0 |:
-        HanoiRec (n - 1) src aux dst
-        note <- src[#src]
-        8< src[#src]
-        dst << note
-        <:> note
-        HanoiRec (n - 1) aux dst src
+Euclides a b |:
+    <!> "Here" a b
+    while a /= b |:
+        if a > b |:
+            a <- a - b
+        :| else |:
+            b <- b - a
+        :|
     :|
+    <!> "El seu MCD es" a
 :|
