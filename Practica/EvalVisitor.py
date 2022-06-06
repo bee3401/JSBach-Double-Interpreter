@@ -14,7 +14,6 @@ numeric_op_dictionary = {
     '/': lambda x, y: x // y,
     '^': lambda x, y: x ^ y
 }
-
 logical_op_dictionary = {
     '=': lambda x, y: x == y,
     '/=': lambda x, y: x != y,
@@ -29,20 +28,14 @@ def decode_key(key, encode):
     if encode:
         if len(key) > 2:
             raise Exception("Invalid Key")
-
         letter = key[0]
         number = '4'        # C4 default 
-
         if len(key) > 1 :
             number = key[1]
-        
         i = 0
-        
         while i < len(letters) and letters[i] != letter:
             i = i + 1
-        
         return 8*int(number) + i
-    
     else:
         number = str(key//8)
         letter = str(letters[key%7]).lower()
@@ -73,13 +66,10 @@ class EvalVisitor(jsBachVisitor):
         self.methods            = {}
         self.parameters         = parameters
         self.arrays             = {}
-
         self.current_function = start_function
         self.array            = []
         self.function_stack   = []
-
         self.read_only        = True
-
         self.keys             = ["A", "B", "C", "D", "E", "F", "G"]
         self.sheet            = []
         self.memory_sim       = {}
@@ -90,37 +80,29 @@ class EvalVisitor(jsBachVisitor):
         l = list(ctx.getChildren())
         i = 0
         file = self.current_function
-       
         while i < len(l) and l[i].getText() != "<EOF>":
             function_info = self.visit(l[i])
             self.methods[function_info[0]] = (l[i], function_info[1])
             i += 1
-        
         self.memory_sim[self.current_function] = {}
         self.function_stack.append(self.current_function)
         self.read_only = False
-        
         if len(self.parameters) > 0:
             if len(self.parameters) == len(self.methods[self.current_function][1]):
                 variables = self.methods[self.current_function][1]
                 self.variables[self.current_function] = {}
-                
                 for i in range(0, len(variables)):
                     self.variables[self.current_function][variables[i]] = int(self.parameters[i])
-                
                 self.local_variables = self.variables[self.current_function]
             else:
                 raise Exception("Start function came with parameters but the right amount was not provided") 
-
         self.visit(self.methods[self.current_function][0])
-
         if len(self.sheet) != 0:
             generate_score(file, " ".join(self.sheet))
 
     def visitMethod_call(self, ctx):
        #print("visitMethod_call")
         l = list(ctx.getChildren())
-
         if l[0].getText() in self.methods:
             previous_function = self.current_function
             parameter_names = self.methods[l[0].getText()][1]
@@ -133,7 +115,6 @@ class EvalVisitor(jsBachVisitor):
                 new_local_variables = self.variables[function_tag]
             else:
                 new_local_variables = {}
-            
             # add parameters to local variables
             if len(l) > 1:
                 if parameters_length == len(parameter_names):
@@ -142,18 +123,14 @@ class EvalVisitor(jsBachVisitor):
                         value = self.visit(l[i])
                         if isinstance(value, int):
                             new_local_variables[parameter_names[i-1]] = value
-
                         elif isinstance(value, list):
                             #get the array's memory address
                             adr = self.memory_sim[self.current_function][l[i].getText()]
                             #set the memory address access for the parameter in the new function
                             self.memory_sim[function_tag][parameter_names[i-1]] = adr
-                    
                     self.local_variables = new_local_variables    
-                
                 else:
-                    raise Exception("Unexpected number of parameters for this function")
-            
+                    raise Exception("Unexpected number of parameters for this function") 
             #change current function
             self.current_function = function_tag
             #call function
@@ -173,7 +150,6 @@ class EvalVisitor(jsBachVisitor):
             self.function_stack.pop()
         else:
             raise Exception("Unknown function")
-
 
     def visitFunction(self, ctx):
         #print("visitFunction")
@@ -280,9 +256,9 @@ class EvalVisitor(jsBachVisitor):
         output = ""
         for i in range(1, len(l)):
             if l[i].getText()[0] == '"': #isinstance(l[1].getText(), str) and l[1].getText() not in self.local_variables:  
-                output += str(l[i].getText()).replace('"', ' ')
+                output += str(l[i].getText()).replace('"',"")
             else:
-                output += str(self.visit(l[i])).replace('"', ' ')
+                output += str(self.visit(l[i])).replace('"',"")
             output += " "
         print(output)
 
@@ -410,6 +386,5 @@ class EvalVisitor(jsBachVisitor):
             key_array = []
             for i in self.array:
                 key_array.append(decode_key(i, False))
-
             self.sheet = self.sheet + key_array
             self.array.clear()

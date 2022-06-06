@@ -1,12 +1,13 @@
 ~~~ programa que llegeix dos enters i n'escriu el seu maxim comu divisor ~~~
 
-Main a b |:
-    <!> "Calculant el mcd de " a b "..."
+Main |:
+    <!> "Escriu dos nombres"
+    <?> a
+    <?> b
     Euclides a b
 :|
 
 Euclides a b |:
-    <!> "Here" a b
     while a /= b |:
         if a > b |:
             a <- a - b
