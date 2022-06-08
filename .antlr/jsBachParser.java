@@ -20,7 +20,7 @@ public class jsbachParser extends Parser {
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, KEY=19, NUM=20, VAR=21, METHOD_NAME=22, MES=23, MENYS=24, MUL=25, 
 		DIV=26, MOD=27, EQ=28, NEQ=29, LT=30, GT=31, LEQ=32, GEQ=33, COMMENT=34, 
-		STR=35, WS=36;
+		STR=35, WS=36, ALL=37;
 	public static final int
 		RULE_root = 0, RULE_function = 1, RULE_body = 2, RULE_method_call = 3, 
 		RULE_expr = 4, RULE_assig = 5, RULE_read = 6, RULE_write = 7, RULE_play = 8, 
@@ -50,7 +50,7 @@ public class jsbachParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, "KEY", "NUM", "VAR", "METHOD_NAME", 
 			"MES", "MENYS", "MUL", "DIV", "MOD", "EQ", "NEQ", "LT", "GT", "LEQ", 
-			"GEQ", "COMMENT", "STR", "WS"
+			"GEQ", "COMMENT", "STR", "WS", "ALL"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1299,7 +1299,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u00c2\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\'\u00c2\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\3\2\6\2(\n\2\r\2\16\2)\3\2\3\2\3\3\3\3\7\3\60\n\3\f\3\16\3"+

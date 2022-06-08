@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,36,192,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,37,192,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,1,0,4,0,38,8,0,11,0,12,0,
         39,1,0,1,0,1,1,1,1,5,1,46,8,1,10,1,12,1,49,9,1,1,1,1,1,1,1,1,1,1,
@@ -102,7 +102,7 @@ class jsbachParser ( Parser ):
                       "<INVALID>", "<INVALID>", "<INVALID>", "KEY", "NUM", 
                       "VAR", "METHOD_NAME", "MES", "MENYS", "MUL", "DIV", 
                       "MOD", "EQ", "NEQ", "LT", "GT", "LEQ", "GEQ", "COMMENT", 
-                      "STR", "WS" ]
+                      "STR", "WS", "ALL" ]
 
     RULE_root = 0
     RULE_function = 1
@@ -165,6 +165,7 @@ class jsbachParser ( Parser ):
     COMMENT=34
     STR=35
     WS=36
+    ALL=37
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)

@@ -99,7 +99,6 @@ class EvalVisitor(jsbachVisitor):
                 self.local_variables = self.variables[self.current_function]
             else:
                 raise Exception("Start function came with parameters but the right amount was not provided") 
-        
         self.visit(self.methods[self.current_function][0])
         
         #Reproduim la partitura al final del programa

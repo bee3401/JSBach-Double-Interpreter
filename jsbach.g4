@@ -52,7 +52,7 @@ rmElem      :   '8<' getElem        ;
 KEY             : [A-G] [0-8]?              ; //? since no numeric value mean C4 D4 .. B4
 NUM             : [0-9]+                    ;
 VAR             : [a-z] [a-zA-Z_0-9]*       ;
-METHOD_NAME     : [A-Z] [a-zA-Z_0-9]*       ;
+METHOD_NAME     : [A-Z] ALL*       ;
 
 MES     : '+' ;
 MENYS   : '-' ;
@@ -70,3 +70,4 @@ GEQ     : '>=';
 COMMENT  : '~~~' ~[\r\n]* '~~~' -> skip ;
 STR   : '"' ~ '"'* '"'        ;
 WS      : [ \n]+ -> skip ;
+ALL : [a-zA-Z_0-9]|'á'|'à'|'â'|'ã'|'é'|'ê'|'í'|'ó'|'ô'|'õ'|'ú'|'ü'|'ç'|'À'|'Á'|'Â'|'Ã'|'É'|'Ê'|'Í'|'Ó'|'Ô'|'Õ'|'Ú'|'Ü'|'Ç'|'_';

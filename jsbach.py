@@ -27,7 +27,3 @@ if len(sys.argv) > 2:
 
 visitor = EvalVisitor(startFunc, params)
 visitor.visit(tree)
-
-#tree = parser.root() 
-#visitor = TreeVisitor()
-#visitor.visit(tree)
