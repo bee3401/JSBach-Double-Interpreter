@@ -1,4 +1,4 @@
-// Generated from /Users/beaadc/Documents/GitHub/JSBach-Double-Interpreter/jsbach.g4 by ANTLR 4.9.2
+// Generated from /Users/beaadc/Documents/GitHub/JSBach-Double-Interpreter/Practica/jsb.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class jsbachParser extends Parser {
+public class jsbParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -88,7 +88,7 @@ public class jsbachParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "jsbach.g4"; }
+	public String getGrammarFileName() { return "jsb.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -99,13 +99,13 @@ public class jsbachParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public jsbachParser(TokenStream input) {
+	public jsbParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	public static class RootContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(jsbachParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(jsbParser.EOF, 0); }
 		public List<FunctionContext> function() {
 			return getRuleContexts(FunctionContext.class);
 		}
@@ -155,13 +155,13 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class FunctionContext extends ParserRuleContext {
-		public TerminalNode METHOD_NAME() { return getToken(jsbachParser.METHOD_NAME, 0); }
+		public TerminalNode METHOD_NAME() { return getToken(jsbParser.METHOD_NAME, 0); }
 		public BodyContext body() {
 			return getRuleContext(BodyContext.class,0);
 		}
-		public List<TerminalNode> VAR() { return getTokens(jsbachParser.VAR); }
+		public List<TerminalNode> VAR() { return getTokens(jsbParser.VAR); }
 		public TerminalNode VAR(int i) {
-			return getToken(jsbachParser.VAR, i);
+			return getToken(jsbParser.VAR, i);
 		}
 		public FunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -349,7 +349,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class Method_callContext extends ParserRuleContext {
-		public TerminalNode METHOD_NAME() { return getToken(jsbachParser.METHOD_NAME, 0); }
+		public TerminalNode METHOD_NAME() { return getToken(jsbParser.METHOD_NAME, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
@@ -407,9 +407,9 @@ public class jsbachParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode NUM() { return getToken(jsbachParser.NUM, 0); }
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
-		public TerminalNode KEY() { return getToken(jsbachParser.KEY, 0); }
+		public TerminalNode NUM() { return getToken(jsbParser.NUM, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
+		public TerminalNode KEY() { return getToken(jsbParser.KEY, 0); }
 		public ArrayContext array() {
 			return getRuleContext(ArrayContext.class,0);
 		}
@@ -425,16 +425,16 @@ public class jsbachParser extends Parser {
 		public RmElemContext rmElem() {
 			return getRuleContext(RmElemContext.class,0);
 		}
-		public TerminalNode EQ() { return getToken(jsbachParser.EQ, 0); }
-		public TerminalNode NEQ() { return getToken(jsbachParser.NEQ, 0); }
-		public TerminalNode LT() { return getToken(jsbachParser.LT, 0); }
-		public TerminalNode GT() { return getToken(jsbachParser.GT, 0); }
-		public TerminalNode LEQ() { return getToken(jsbachParser.LEQ, 0); }
-		public TerminalNode GEQ() { return getToken(jsbachParser.GEQ, 0); }
-		public TerminalNode MUL() { return getToken(jsbachParser.MUL, 0); }
-		public TerminalNode DIV() { return getToken(jsbachParser.DIV, 0); }
-		public TerminalNode MES() { return getToken(jsbachParser.MES, 0); }
-		public TerminalNode MENYS() { return getToken(jsbachParser.MENYS, 0); }
+		public TerminalNode EQ() { return getToken(jsbParser.EQ, 0); }
+		public TerminalNode NEQ() { return getToken(jsbParser.NEQ, 0); }
+		public TerminalNode LT() { return getToken(jsbParser.LT, 0); }
+		public TerminalNode GT() { return getToken(jsbParser.GT, 0); }
+		public TerminalNode LEQ() { return getToken(jsbParser.LEQ, 0); }
+		public TerminalNode GEQ() { return getToken(jsbParser.GEQ, 0); }
+		public TerminalNode MUL() { return getToken(jsbParser.MUL, 0); }
+		public TerminalNode DIV() { return getToken(jsbParser.DIV, 0); }
+		public TerminalNode MES() { return getToken(jsbParser.MES, 0); }
+		public TerminalNode MENYS() { return getToken(jsbParser.MENYS, 0); }
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -636,7 +636,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class AssigContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -674,7 +674,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class ReadContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public ReadContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -705,9 +705,9 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class WriteContext extends ParserRuleContext {
-		public List<TerminalNode> STR() { return getTokens(jsbachParser.STR); }
+		public List<TerminalNode> STR() { return getTokens(jsbParser.STR); }
 		public TerminalNode STR(int i) {
-			return getToken(jsbachParser.STR, i);
+			return getToken(jsbParser.STR, i);
 		}
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -784,11 +784,11 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class PlayContext extends ParserRuleContext {
-		public TerminalNode KEY() { return getToken(jsbachParser.KEY, 0); }
+		public TerminalNode KEY() { return getToken(jsbParser.KEY, 0); }
 		public NumsNkeysContext numsNkeys() {
 			return getRuleContext(NumsNkeysContext.class,0);
 		}
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public PlayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -851,7 +851,7 @@ public class jsbachParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode KEY() { return getToken(jsbachParser.KEY, 0); }
+		public TerminalNode KEY() { return getToken(jsbParser.KEY, 0); }
 		public Else_blockContext else_block() {
 			return getRuleContext(Else_blockContext.class,0);
 		}
@@ -1047,15 +1047,15 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class NumsNkeysContext extends ParserRuleContext {
-		public TerminalNode NUM() { return getToken(jsbachParser.NUM, 0); }
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode NUM() { return getToken(jsbParser.NUM, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public List<NumsNkeysContext> numsNkeys() {
 			return getRuleContexts(NumsNkeysContext.class);
 		}
 		public NumsNkeysContext numsNkeys(int i) {
 			return getRuleContext(NumsNkeysContext.class,i);
 		}
-		public TerminalNode KEY() { return getToken(jsbachParser.KEY, 0); }
+		public TerminalNode KEY() { return getToken(jsbParser.KEY, 0); }
 		public NumsNkeysContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1142,7 +1142,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class GetLengthContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public GetLengthContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1173,7 +1173,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class GetElemContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -1211,7 +1211,7 @@ public class jsbachParser extends Parser {
 	}
 
 	public static class AddElemContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(jsbachParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(jsbParser.VAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}

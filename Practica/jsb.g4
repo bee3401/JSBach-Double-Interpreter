@@ -1,4 +1,4 @@
-grammar jsBach;
+grammar jsb;
 
 root : function+ EOF ;
 

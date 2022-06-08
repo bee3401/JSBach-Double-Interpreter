@@ -1,4 +1,4 @@
-// Generated from /Users/beaadc/Documents/GitHub/JSBach-Double-Interpreter/jsbach.g4 by ANTLR 4.9.2
+// Generated from /Users/beaadc/Documents/GitHub/JSBach-Double-Interpreter/Practica/jsb.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class jsbachLexer extends Lexer {
+public class jsbLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -91,13 +91,13 @@ public class jsbachLexer extends Lexer {
 	}
 
 
-	public jsbachLexer(CharStream input) {
+	public jsbLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "jsbach.g4"; }
+	public String getGrammarFileName() { return "jsb.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
